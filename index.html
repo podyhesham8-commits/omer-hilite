@@ -1,0 +1,2680 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Optimization Meta Tags -->
+  <title>EduHub & Tournaments Hub | منصة المذاكرات وصناع المحتوى والبطولات</title>
+  <meta name="description" content="منصة متكاملة تجمع بين بنك المذاكرات التعليمية ومصادر صناع المحتوى والأكواد البرمجية، مع لوحة تنظيم البطولات الرياضية والإلكترونية وتصفيات المباريات التفاعلية." />
+  <meta name="keywords" content="مذاكرات تعليمية, ملخصات دراسية, أكواد برمجية, صناع محتوى, تنظيم بطولات, شجرة تصفيات, دوريات إلكترونية, فايربيس, سحابة Firestore" />
+  <meta name="author" content="EduHub & Tournaments Hub" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://example.com/eduhub-tournaments" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/eduhub-tournaments" />
+  <meta property="og:title" content="EduHub & Tournaments Hub | منصة المذاكرات وصناع المحتوى والبطولات" />
+  <meta property="og:description" content="بنك المذاكرات التعليمية وأكواد المطورين مع منظم البطولات وشجرة التصفيات التفاعلية وربط Firebase المباشر." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&auto=format&fit=crop&q=80" />
+  <meta property="og:locale" content="ar_AR" />
+  <meta property="og:site_name" content="EduHub & Tournaments Hub" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EduHub & Tournaments Hub | منصة المذاكرات وصناع المحتوى والبطولات" />
+  <meta name="twitter:description" content="بنك المذاكرات وأكواد صناع المحتوى ولوحة تنظيم البطولات التفاعلية مع دعم Firebase." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&auto=format&fit=crop&q=80" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://example.com/#website",
+        "url": "https://example.com",
+        "name": "EduHub & Tournaments Hub",
+        "description": "منصة صناع المحتوى والمذاكرات التعليمية مع منظم البطولات التفاعلية",
+        "inLanguage": "ar"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "EduHub & Tournaments Platform",
+        "applicationCategory": "Educational & Gaming Application",
+        "operatingSystem": "Web, All modern browsers"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: Cairo & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Cairo', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            },
+            tourney: {
+              400: '#f59e0b',
+              500: '#d97706',
+              600: '#b45309',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome Icons via CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(99, 102, 241, 0.4);
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(99, 102, 241, 0.8);
+    }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+    .glow-indigo {
+      box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.3);
+    }
+    .glow-amber {
+      box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-indigo-500 selection:text-white flex flex-col custom-scroll antialiased">
+
+  <!-- ==================== TOP NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Logo & Brand -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.switchPlatform('edu')">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-amber-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 border border-indigo-400/30">
+            <i class="fa-solid fa-layer-group text-2xl text-white"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xl font-extrabold bg-gradient-to-l from-indigo-400 via-purple-300 to-amber-400 bg-clip-text text-transparent">EduHub & Tournaments</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-mono font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                مباشر
+              </span>
+            </div>
+            <p class="text-xs text-slate-400">منصة المذاكرات وصناع المحتوى • منظم البطولات والتصفيات</p>
+          </div>
+        </div>
+
+        <!-- Platform Switcher Tabs (Desktop) -->
+        <nav class="hidden md:flex items-center gap-1.5 p-1.5 bg-slate-950/70 border border-slate-800 rounded-2xl shadow-inner">
+          <button id="tab-btn-edu" onclick="window.switchPlatform('edu')" class="flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
+            <i class="fa-solid fa-graduation-cap text-base"></i>
+            <span>المذاكرات وأكواد المحتوى</span>
+          </button>
+          
+          <button id="tab-btn-tourney" onclick="window.switchPlatform('tourney')" class="flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 transition-all">
+            <i class="fa-solid fa-trophy text-amber-400 text-base"></i>
+            <span>منصة البطولات (Tournaments)</span>
+          </button>
+        </nav>
+
+        <!-- Right Side: Cloud Status, Auth & Actions -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Live Cloud Database Status Pill -->
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700/80 text-xs shadow-sm">
+            <span id="firebase-status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400 animate-pulse"></span>
+            <span id="firebase-status-text" class="hidden sm:inline font-bold text-emerald-400">سحابة Firestore متصلة</span>
+          </div>
+
+          <!-- Google Auth Button / User Profile -->
+          <div id="auth-container">
+            <button id="google-login-btn" onclick="window.handleGoogleSignIn()" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white text-slate-900 hover:bg-slate-100 font-bold text-xs transition-all shadow-md shadow-white/10 border border-slate-200 active:scale-95">
+              <i class="fa-brands fa-google text-red-500 text-sm"></i>
+              <span class="hidden sm:inline">تسجيل الدخول بجوجل</span>
+              <span class="sm:hidden">دخول</span>
+            </button>
+            
+            <!-- User Profile Button (Opens Profile Management Modal) -->
+            <div id="user-profile-menu" class="hidden items-center gap-2">
+              <button onclick="window.openUserProfileModal()" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700/80 border border-slate-700 rounded-xl px-2.5 py-1.5 transition-all group">
+                <img id="user-avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=user" alt="Avatar" class="w-7 h-7 rounded-lg object-cover border border-indigo-400/50 bg-slate-700" />
+                <span id="user-name" class="text-xs font-bold text-slate-200 max-w-[100px] truncate">مستخدم</span>
+                <i class="fa-solid fa-user-gear text-slate-400 group-hover:text-indigo-400 text-xs mr-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Add Content / Tournament Action Button -->
+          <button id="global-action-btn" onclick="window.handleGlobalAddAction()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold text-xs transition-all shadow-lg shadow-indigo-500/25 active:scale-95">
+            <i class="fa-solid fa-plus text-xs"></i>
+            <span id="global-action-label" class="hidden sm:inline">نشر محتوى جديد</span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Tabs Bar -->
+      <div class="flex md:hidden items-center justify-between py-2 border-t border-slate-800/80 gap-1">
+        <button onclick="window.switchPlatform('edu')" class="mobile-tab-btn flex-1 py-1.5 text-center text-xs font-bold rounded-lg bg-indigo-600/30 text-indigo-300 border border-indigo-500/30" data-tab="edu">
+          <i class="fa-solid fa-graduation-cap ml-1"></i> المذاكرات
+        </button>
+        <button onclick="window.switchPlatform('tourney')" class="mobile-tab-btn flex-1 py-1.5 text-center text-xs font-bold rounded-lg text-slate-400 hover:bg-slate-800" data-tab="tourney">
+          <i class="fa-solid fa-trophy ml-1 text-amber-400"></i> البطولات
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+    <!-- ========================================================================= -->
+    <!-- SECTION 1: منصة المذاكرات التعليمية ومصادر صناع المحتوى والأكواد (EDUHUB) -->
+    <!-- ========================================================================= -->
+    <section id="section-edu" class="space-y-8">
+      
+      <!-- Hero Banner with Quick Actions -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-950 via-slate-900 to-purple-950 border border-indigo-800/30 p-6 sm:p-10 shadow-2xl">
+        <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+          <div class="space-y-4 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold">
+              <i class="fa-solid fa-sparkles text-amber-400"></i> منصة المذاكرات وأفكار صناع المحتوى
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+              بنك المذاكرات التعليمية، وأكواد وأفكار <span class="bg-gradient-to-l from-indigo-400 to-purple-400 bg-clip-text text-transparent">صناع المحتوى</span>
+            </h1>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              كل قسم له نموذج نشر مستقل مخصص لمتطلباته: مذكرات تعليمية مع تحديد الصف الدراسي والمادة، أكواد برمجية مع لغة البرمجة والشرح، وأفكار محتوى مع نسبة النجاح المتوقعة والخطاف. مع نظام تعليق واحد ولايك واحد لكل حساب!
+            </p>
+
+            <!-- Quick Publishing Action Buttons (3 Dedicated Publish Pathways) -->
+            <div class="flex flex-wrap gap-2.5 pt-2">
+              <button onclick="window.openAddModalWithType('study')" class="px-4 py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs font-bold transition-all flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-book-open text-blue-400"></i> + نشر مذكرة دراسية
+              </button>
+              <button onclick="window.openAddModalWithType('code')" class="px-4 py-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 text-xs font-bold transition-all flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-code text-emerald-400"></i> + نشر كود برمجي
+              </button>
+              <button onclick="window.openAddModalWithType('creator')" class="px-4 py-2.5 rounded-xl bg-amber-600/20 hover:bg-amber-600/30 border border-amber-500/40 text-amber-300 text-xs font-bold transition-all flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-lightbulb text-amber-400"></i> + نشر فكرة محتوى
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Stats Counter -->
+          <div class="grid grid-cols-2 gap-3 w-full lg:w-auto">
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-2xl p-4 text-center min-w-[120px]">
+              <span id="stat-materials-count" class="block text-2xl font-black text-blue-400">0</span>
+              <span class="text-xs text-slate-400 font-medium">المذكرات</span>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-2xl p-4 text-center min-w-[120px]">
+              <span id="stat-codes-count" class="block text-2xl font-black text-emerald-400">0</span>
+              <span class="text-xs text-slate-400 font-medium">الأكواد البرمجية</span>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-2xl p-4 text-center min-w-[120px]">
+              <span id="stat-ideas-count" class="block text-2xl font-black text-amber-400">0</span>
+              <span class="text-xs text-slate-400 font-medium">أفكار المحتوى</span>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-700/60 rounded-2xl p-4 text-center min-w-[120px]">
+              <span id="stat-bookmarks-count" class="block text-2xl font-black text-rose-400">0</span>
+              <span class="text-xs text-slate-400 font-medium">المفضلة</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Controls & Search -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg space-y-4">
+        
+        <!-- Search and Primary Category Row -->
+        <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+          
+          <!-- Category Tabs -->
+          <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+            <button onclick="window.setEduCategory('all')" class="edu-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30" data-cat="all">
+              <i class="fa-solid fa-border-all ml-1.5"></i> الكل
+            </button>
+            <button onclick="window.setEduCategory('study')" class="edu-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:bg-slate-800" data-cat="study">
+              <i class="fa-solid fa-book-open ml-1.5 text-blue-400"></i> مذكرات تعليمية
+            </button>
+            <button onclick="window.setEduCategory('code')" class="edu-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:bg-slate-800" data-cat="code">
+              <i class="fa-solid fa-terminal ml-1.5 text-emerald-400"></i> أكواد وسكربتات
+            </button>
+            <button onclick="window.setEduCategory('creator')" class="edu-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:bg-slate-800" data-cat="creator">
+              <i class="fa-solid fa-video ml-1.5 text-amber-400"></i> أفكار صناع المحتوى
+            </button>
+            <button onclick="window.setEduCategory('bookmarks')" class="edu-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:bg-slate-800" data-cat="bookmarks">
+              <i class="fa-solid fa-bookmark ml-1.5 text-rose-400"></i> المفضلة
+            </button>
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative w-full md:w-80">
+            <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400 text-sm"></i>
+            <input type="text" id="edu-search-input" oninput="window.renderEduItems()" placeholder="ابحث في المذكرات، الأكواد، المواضيع..." class="w-full bg-slate-950 border border-slate-700/80 rounded-xl pr-10 pl-4 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
+          </div>
+        </div>
+
+        <!-- Secondary Sub-filters: Stages & Languages -->
+        <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+          <span class="font-bold text-slate-300"><i class="fa-solid fa-filter ml-1 text-indigo-400"></i> تصفية متقدمة:</span>
+          
+          <select id="edu-stage-filter" onchange="window.renderEduItems()" class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-300 focus:border-indigo-500 focus:outline-none">
+            <option value="all">جميع المراحل الدراسية</option>
+            <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+            <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+            <option value="الصف الثالث الثانوي / التوجيهي">الصف الثالث الثانوي / التوجيهي</option>
+            <option value="المرحلة الإعدادية / المتوسطة">المرحلة الإعدادية / المتوسطة</option>
+            <option value="المرحلة الابتدائية">المرحلة الابتدائية</option>
+            <option value="المرحلة الجامعية">المرحلة الجامعية</option>
+            <option value="معلومة وثقافة عامة">معلومة وثقافة عامة خارج المنهج</option>
+          </select>
+
+          <select id="edu-tech-filter" onchange="window.renderEduItems()" class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-300 focus:border-indigo-500 focus:outline-none">
+            <option value="all">جميع لغات البرمجة والمنصات</option>
+            <option value="Python">Python</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="TypeScript">TypeScript</option>
+            <option value="React">React / Next.js</option>
+            <option value="HTML / CSS">HTML5 & Tailwind CSS</option>
+            <option value="C++">C++</option>
+            <option value="C#">C# / .NET</option>
+            <option value="Java">Java</option>
+            <option value="PHP">PHP</option>
+            <option value="Bash / Shell">Bash / Linux Scripts</option>
+            <option value="SQL">SQL</option>
+            <option value="YouTube Shorts">YouTube Shorts</option>
+            <option value="TikTok & Reels">TikTok & Reels</option>
+          </select>
+
+          <button onclick="window.resetEduFilters()" class="text-indigo-400 hover:text-indigo-300 underline mr-auto font-medium">
+            إعادة تعيين الفلاتر
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Items Grid View -->
+      <div id="edu-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically via JavaScript from Firestore -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="edu-empty-state" class="text-center py-20 px-4 border border-dashed border-slate-800 rounded-3xl bg-slate-900/30">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-3xl">
+          <i class="fa-solid fa-folder-open"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-200">لا توجد مذكرات أو أكواد منشورة بعد</h3>
+        <p class="text-sm text-slate-400 max-w-md mx-auto mt-2 mb-6">كن أول من يشارك ملخصاً دراسياً أو كوداً برمجياً أو فكرة محتوى في قاعدة البيانات السحابية!</p>
+        <button onclick="window.openAddModalWithType('study')" class="px-6 py-3 rounded-2xl bg-indigo-600 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 hover:bg-indigo-500 transition-all">
+          <i class="fa-solid fa-plus ml-1.5"></i> إضافة أول محتوى الآن
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SECTION 2: منصة تنظيم البطولات الصغيرة (TOURNAMENTS HUB)                  -->
+    <!-- ========================================================================= -->
+    <section id="section-tourney" class="hidden space-y-8">
+      
+      <!-- Tournament Hero Banner -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-950/80 via-slate-900 to-indigo-950 border border-amber-600/30 p-6 sm:p-10 shadow-2xl">
+        <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+          <div class="space-y-3 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
+              <i class="fa-solid fa-crown text-amber-400"></i> نظام إدارة وتصفيات البطولات التنافسية
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+              منصة تنظيم <span class="bg-gradient-to-l from-amber-400 to-orange-400 bg-clip-text text-transparent">البطولات وتصفياتها</span>
+            </h1>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              أنشئ بطولتك الرياضية أو الإلكترونية، حدد نظام التصفية، وتابع شجرة التصفيات التفاعلية (Bracket)، وحدّث نتائج المباريات وتتويج الفائزين مباشرة!
+            </p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+            <button onclick="window.openNewTournamentModal()" class="flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-slate-950 font-black text-sm shadow-xl shadow-amber-500/20 transition-all active:scale-95">
+              <i class="fa-solid fa-plus text-base"></i>
+              <span>إنشاء بطولة جديدة</span>
+            </button>
+            <button onclick="window.openJoinTeamModal()" class="flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold text-sm transition-all active:scale-95">
+              <i class="fa-solid fa-users text-indigo-400"></i>
+              <span>تسجيل فريق مشارك</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tournament Stats Bar -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-slate-800/80">
+          <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-3.5 text-center">
+            <span class="block text-2xl font-black text-amber-400" id="tourney-stat-total">0</span>
+            <span class="text-xs text-slate-400 font-medium">إجمالي البطولات</span>
+          </div>
+          <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-3.5 text-center">
+            <span class="block text-2xl font-black text-indigo-400" id="tourney-stat-matches">0</span>
+            <span class="text-xs text-slate-400 font-medium">المباريات المسجلة</span>
+          </div>
+          <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-3.5 text-center">
+            <span class="block text-2xl font-black text-emerald-400" id="tourney-stat-teams">0</span>
+            <span class="text-xs text-slate-400 font-medium">الفرق المنضمة</span>
+          </div>
+          <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-3.5 text-center">
+            <span class="block text-2xl font-black text-purple-400" id="tourney-stat-prizes">كؤوس وجوائز</span>
+            <span class="text-xs text-slate-400 font-medium">نظام التتويج</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tournament Selector Strip -->
+      <div id="tourney-selector-strip" class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+            <i class="fa-solid fa-gamepad text-lg"></i>
+          </div>
+          <div>
+            <span class="text-xs text-slate-400 block font-medium">البطولة المعروضة حالياً:</span>
+            <select id="tourney-selector" onchange="window.handleSelectTournament(this.value)" class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm font-bold text-amber-300 focus:outline-none focus:border-amber-500 w-full md:w-64">
+              <!-- Populated dynamically from Firestore -->
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+          <button onclick="window.resetCurrentTournamentBracket()" title="إعادة ضبط المباريات" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 transition-all">
+            <i class="fa-solid fa-rotate-left ml-1 text-slate-400"></i> إعادة ضبط الشجرة
+          </button>
+          <button onclick="window.openEditTournamentModal()" title="تعديل بيانات البطولة" class="px-3.5 py-2 rounded-xl bg-indigo-950/40 hover:bg-indigo-900/60 border border-indigo-800/40 text-xs text-indigo-300 transition-all">
+            <i class="fa-solid fa-pen ml-1 text-indigo-400"></i> تعديل البطولة
+          </button>
+          <button onclick="window.deleteCurrentTournament()" title="حذف البطولة" class="px-3.5 py-2 rounded-xl bg-red-950/40 hover:bg-red-900/60 border border-red-800/40 text-xs text-red-300 transition-all">
+            <i class="fa-solid fa-trash ml-1 text-red-400"></i> حذف البطولة
+          </button>
+        </div>
+      </div>
+
+      <!-- Tournament Empty State -->
+      <div id="tourney-empty-state" class="text-center py-20 px-4 border border-dashed border-slate-800 rounded-3xl bg-slate-900/30">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-3xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-3xl">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-200">لا توجد بطولات منشأة حالياً في قاعدة البيانات</h3>
+        <p class="text-sm text-slate-400 max-w-md mx-auto mt-2 mb-6">أنشئ بطولة جديدة الآن لتوليد شجرة التصفيات، تسجيل الفرق، وإدارة وتحديث نتائج المباريات!</p>
+        <button onclick="window.openNewTournamentModal()" class="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg shadow-amber-500/20 transition-all">
+          <i class="fa-solid fa-plus ml-1.5"></i> إنشاء بطولة جديدة
+        </button>
+      </div>
+
+      <!-- Current Selected Tournament Hub Card -->
+      <div id="tourney-active-card" class="hidden bg-slate-900/70 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
+        
+        <!-- Tournament Header & Metadata -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-slate-800">
+          <div class="flex items-center gap-4">
+            <div id="active-tourney-icon" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-indigo-600 flex items-center justify-center text-2xl text-slate-950 font-black shadow-lg shadow-amber-500/20">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-3">
+                <h2 id="active-tourney-name" class="text-2xl font-black text-white">عنوان البطولة</h2>
+                <span id="active-tourney-status" class="px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">جارية الآن</span>
+              </div>
+              <p id="active-tourney-meta" class="text-xs text-slate-400 mt-1">اللعبة: ... • النظام: خروج مغلوب</p>
+            </div>
+          </div>
+
+          <!-- Sub-tabs within Tournament -->
+          <div class="flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-2xl border border-slate-800">
+            <button onclick="window.switchTourneyView('bracket')" id="tview-btn-bracket" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 transition-all">
+              <i class="fa-solid fa-sitemap ml-1"></i> شجرة التصفيات
+            </button>
+            <button onclick="window.switchTourneyView('matches')" id="tview-btn-matches" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all">
+              <i class="fa-solid fa-list-check ml-1"></i> جدول المباريات
+            </button>
+            <button onclick="window.switchTourneyView('teams')" id="tview-btn-teams" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all">
+              <i class="fa-solid fa-users ml-1"></i> قائمة الفرق
+            </button>
+          </div>
+        </div>
+
+        <!-- Champion Showcase Banner -->
+        <div id="champion-showcase-box" class="hidden relative overflow-hidden rounded-2xl bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 border-2 border-amber-500/50 p-6 text-center shadow-2xl">
+          <div class="w-16 h-16 mx-auto mb-2 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-3xl font-black shadow-lg shadow-amber-400/50">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <span class="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">Champion Crowned • تتويج بطل البطولة</span>
+          <h3 id="champion-team-name" class="text-3xl font-black text-white mt-1">اسم الفريق الفائز</h3>
+          <p class="text-sm text-amber-200/90 mt-1 font-medium">مبروك الفوز بلقب البطولة والمركز الأول! 🏆🎉</p>
+        </div>
+
+        <!-- 1) Interactive Tournament Bracket View -->
+        <div id="tview-bracket-container" class="space-y-6">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-diagram-project text-amber-400 text-lg"></i>
+              <h3 class="font-bold text-base text-slate-200">شجرة التصفيات التفاعلية (Single Elimination Bracket)</h3>
+            </div>
+            <span class="text-xs text-slate-400 bg-slate-950 px-3 py-1 rounded-lg border border-slate-800">
+              <i class="fa-solid fa-mouse-pointer ml-1 text-indigo-400"></i> اضغط على "تأهيل الفائز" لنقله للجولة التالية تلقائياً
+            </span>
+          </div>
+
+          <!-- Bracket Canvas -->
+          <div class="overflow-x-auto pb-6 custom-scroll">
+            <div id="interactive-bracket-tree" class="min-w-[800px] flex items-center justify-between gap-8 py-4 px-2">
+              <!-- Populated dynamically via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 2) Matches List View -->
+        <div id="tview-matches-container" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-base text-slate-200">قائمة المباريات ونتائجها</h3>
+            <span class="text-xs text-slate-400">يمكنك تعديل النقاط وحفظ النتيجة مباشرة</span>
+          </div>
+          <div id="matches-schedule-list" class="space-y-3">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- 3) Teams Roster View -->
+        <div id="tview-teams-container" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-base text-slate-200">الفرق المشاركة في البطولة</h3>
+              <p class="text-xs text-slate-400">الفرق المسجلة وأسماء الكباتن وحالة الانضمام</p>
+            </div>
+            <button onclick="window.openJoinTeamModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md">
+              <i class="fa-solid fa-plus ml-1"></i> تسجيل فريق جديد
+            </button>
+          </div>
+          <div id="teams-roster-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ==================== USER PROFILE DRAWER / MODAL ==================== -->
+  <div id="modal-user-profile" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl overflow-y-auto max-h-[92vh] custom-scroll">
+      
+      <!-- Profile Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <img id="profile-modal-avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=user" alt="User Avatar" class="w-14 h-14 rounded-2xl object-cover border-2 border-indigo-500 bg-slate-800 shadow-lg" />
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 id="profile-modal-name" class="font-black text-xl text-white">اسم المستخدم</h3>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">حسابك الشخصي</span>
+            </div>
+            <p id="profile-modal-email" class="text-xs text-slate-400 font-mono">user@example.com</p>
+          </div>
+        </div>
+        <button onclick="window.closeModal('modal-user-profile')" class="text-slate-400 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Profile Summary Counters -->
+      <div class="grid grid-cols-3 gap-3">
+        <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 text-center">
+          <span id="profile-count-posts" class="block text-2xl font-black text-indigo-400">0</span>
+          <span class="text-[11px] text-slate-400 font-medium">منشوراتي وأكوادي</span>
+        </div>
+        <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 text-center">
+          <span id="profile-count-tourneys" class="block text-2xl font-black text-amber-400">0</span>
+          <span class="text-[11px] text-slate-400 font-medium">بطولاتي المنشأة</span>
+        </div>
+        <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 text-center">
+          <span id="profile-count-comments" class="block text-2xl font-black text-emerald-400">0</span>
+          <span class="text-[11px] text-slate-400 font-medium">تعليقاتي</span>
+        </div>
+      </div>
+
+      <!-- Profile Navigation Tabs: My Posts, My Tournaments, My Comments -->
+      <div class="flex items-center gap-2 border-b border-slate-800 pb-2">
+        <button onclick="window.switchProfileTab('posts')" id="ptab-btn-posts" class="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white transition-all">
+          <i class="fa-solid fa-folder-open ml-1"></i> منشوراتي ومذكراتي
+        </button>
+        <button onclick="window.switchProfileTab('tourneys')" id="ptab-btn-tourneys" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all">
+          <i class="fa-solid fa-trophy ml-1"></i> بطولاتي المنشأة
+        </button>
+        <button onclick="window.switchProfileTab('comments')" id="ptab-btn-comments" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all">
+          <i class="fa-solid fa-comments ml-1"></i> تعليقاتي
+        </button>
+      </div>
+
+      <!-- Tab Content 1: My Posts (with Edit & Delete) -->
+      <div id="ptab-content-posts" class="space-y-3">
+        <div id="profile-posts-list" class="space-y-3 max-h-72 overflow-y-auto custom-scroll pr-1">
+          <!-- Populated dynamically with edit and delete controls -->
+        </div>
+      </div>
+
+      <!-- Tab Content 2: My Tournaments (with Edit & Delete) -->
+      <div id="ptab-content-tourneys" class="hidden space-y-3">
+        <div id="profile-tourneys-list" class="space-y-3 max-h-72 overflow-y-auto custom-scroll pr-1">
+          <!-- Populated dynamically with edit and delete controls -->
+        </div>
+      </div>
+
+      <!-- Tab Content 3: My Comments (with Edit & Delete) -->
+      <div id="ptab-content-comments" class="hidden space-y-3">
+        <div id="profile-comments-list" class="space-y-3 max-h-72 overflow-y-auto custom-scroll pr-1">
+          <!-- Populated dynamically with edit and delete controls -->
+        </div>
+      </div>
+
+      <!-- Profile Footer: Sign Out -->
+      <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
+        <button onclick="window.handleSignOut()" class="px-4 py-2 rounded-xl bg-red-950/40 hover:bg-red-900/60 border border-red-800/40 text-red-300 font-bold text-xs transition-all flex items-center gap-2">
+          <i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج
+        </button>
+        <button onclick="window.closeModal('modal-user-profile')" class="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs">
+          إغلاق
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== NEW DEDICATED PUBLISHING MODAL (3 DISTINCT FORMS) ==================== -->
+  <div id="modal-add-content" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl overflow-y-auto max-h-[92vh] custom-scroll">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div>
+          <h3 class="font-black text-xl text-white">نشر محتوى جديد على المنصة</h3>
+          <p class="text-xs text-slate-400 mt-0.5">اختر قسم النشر المطلوب؛ لكل قسم حقول مخصصة لمتطلباته بدقة</p>
+        </div>
+        <button onclick="window.closeModal('modal-add-content')" class="text-slate-400 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Section Selection Cards (3 Distinct Buttons) -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        
+        <!-- Tab 1: Study -->
+        <button type="button" onclick="window.switchPublishType('study')" id="pub-type-btn-study" class="p-4 rounded-2xl border text-right transition-all flex flex-col justify-between gap-3 bg-blue-600/20 border-blue-500 text-white shadow-lg shadow-blue-500/20">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <div>
+            <h4 class="font-black text-sm">مذكرة تعليمية</h4>
+            <p class="text-[11px] text-slate-300 mt-0.5">تحديد الصف، المادة، ومعلومات خارجية</p>
+          </div>
+        </button>
+
+        <!-- Tab 2: Code -->
+        <button type="button" onclick="window.switchPublishType('code')" id="pub-type-btn-code" class="p-4 rounded-2xl border text-right transition-all flex flex-col justify-between gap-3 bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <div>
+            <h4 class="font-black text-sm">كود وسكربت</h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">لغة البرمجة، الشرح، وحزم التثبيت</p>
+          </div>
+        </button>
+
+        <!-- Tab 3: Creator Idea -->
+        <button type="button" onclick="window.switchPublishType('creator')" id="pub-type-btn-creator" class="p-4 rounded-2xl border text-right transition-all flex flex-col justify-between gap-3 bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <div>
+            <h4 class="font-black text-sm">فكرة صانع محتوى</h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">نسبة النجاح المتوقعة، الخطاف، والسكربت</p>
+          </div>
+        </button>
+
+      </div>
+
+      <!-- ================= FORM 1: STUDY MATERIAL FORM ================= -->
+      <form id="form-publish-study" onsubmit="window.submitPublishStudy(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">اسم المذكرة أو الدرس:</label>
+          <input type="text" id="study-title" required placeholder="مثال: ملخص قوانين الحركة والجاذبية، مراجعة ليلة الامتحان في الأحياء..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">المادة الدراسية:</label>
+            <input type="text" id="study-subject" required placeholder="مثال: فيزياء، رياضيات، لغة عربية، كيمياء..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">تحديد الصف أو المرحلة الدراسية:</label>
+            <select id="study-grade" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500">
+              <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+              <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+              <option value="الصف الثالث الثانوي / التوجيهي" selected>الصف الثالث الثانوي / التوجيهي</option>
+              <option value="المرحلة الإعدادية / المتوسطة">المرحلة الإعدادية / المتوسطة</option>
+              <option value="المرحلة الابتدائية">المرحلة الابتدائية</option>
+              <option value="المرحلة الجامعية">المرحلة الجامعية</option>
+              <option value="معلومة وثقافة عامة">معلومة وثقافة عامة (خارج المنهج)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">نوع ومحتوى المذكرة التعليمية:</label>
+          <div class="grid grid-cols-3 gap-2 mb-2">
+            <label class="cursor-pointer text-center">
+              <input type="radio" name="study-type-tag" value="ملخص شرح وقوانين" checked class="peer sr-only">
+              <div class="py-2 rounded-lg bg-slate-950 border border-slate-800 peer-checked:border-blue-500 peer-checked:text-blue-300 font-bold text-[11px]">ملخص شرح وقوانين</div>
+            </label>
+            <label class="cursor-pointer text-center">
+              <input type="radio" name="study-type-tag" value="نماذج امتحانات وأسئلة" class="peer sr-only">
+              <div class="py-2 rounded-lg bg-slate-950 border border-slate-800 peer-checked:border-blue-500 peer-checked:text-blue-300 font-bold text-[11px]">امتحانات وتدريبات</div>
+            </label>
+            <label class="cursor-pointer text-center">
+              <input type="radio" name="study-type-tag" value="معلومة إثرائية خارجية" class="peer sr-only">
+              <div class="py-2 rounded-lg bg-slate-950 border border-slate-800 peer-checked:border-blue-500 peer-checked:text-blue-300 font-bold text-[11px]">معلومة إثرائية عامة</div>
+            </label>
+          </div>
+          <textarea id="study-content" rows="5" required placeholder="اكتب نص المذكرة، أهم النقاط، القوانين، أو الملاحظات الهامة هنا..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-blue-500 leading-relaxed"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">رابط ملف PDF أو مصدر خارجي (اختياري):</label>
+          <input type="url" id="study-url" placeholder="https://drive.google.com/... أو رابط التحميل" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="pt-3 flex gap-3">
+          <button type="submit" class="flex-1 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all shadow-lg shadow-blue-600/30">
+            <i class="fa-solid fa-cloud-arrow-up ml-1.5"></i> نشر المذكرة التعليمية
+          </button>
+          <button type="button" onclick="window.closeModal('modal-add-content')" class="px-5 py-3 rounded-xl bg-slate-800 text-slate-300 font-bold">
+            إلغاء
+          </button>
+        </div>
+      </form>
+
+      <!-- ================= FORM 2: CODE SNIPPET FORM ================= -->
+      <form id="form-publish-code" onsubmit="window.submitPublishCode(event)" class="hidden space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">اسم الكود أو السكربت البرمجي:</label>
+          <input type="text" id="code-title" required placeholder="مثال: سكربت Python لتقطيع الفيديو تلقائياً، Custom React Hook لإدارة الكاش..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">لغة البرمجة أو الإطار:</label>
+            <select id="code-lang" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500 font-mono">
+              <option value="Python" selected>Python</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="TypeScript">TypeScript</option>
+              <option value="React">React / JSX</option>
+              <option value="HTML / CSS">HTML5 & Tailwind CSS</option>
+              <option value="C++">C++</option>
+              <option value="C#">C# / .NET</option>
+              <option value="Java">Java</option>
+              <option value="PHP">PHP</option>
+              <option value="Bash / Shell">Bash / Linux Script</option>
+              <option value="SQL">SQL</option>
+              <option value="Dart / Flutter">Dart / Flutter</option>
+              <option value="Rust">Rust</option>
+              <option value="Go">Go</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">تصنيف الوظيفة:</label>
+            <input type="text" id="code-category" required placeholder="مثال: أتمتة صناع المحتوى، واجهات مستخدم، بوتات..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">وصف الكود وكيفية استخدامه:</label>
+          <input type="text" id="code-desc" required placeholder="اشرح باختصار ماذا يفعل هذا الكود وما المدخلات والمخرجات..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">حزم أو مكتبات التثبيت المطلوبة (اختياري):</label>
+          <input type="text" id="code-packages" placeholder="مثال: pip install yt-dlp moviepy أو npm i lucide-react" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 font-mono focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">الكود البرمجي الكامل:</label>
+          <textarea id="code-snippet-text" rows="6" required placeholder="الصق الكود البرمجي هنا..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-emerald-400 font-mono focus:outline-none focus:border-emerald-500 dir-ltr select-all"></textarea>
+        </div>
+
+        <div class="pt-3 flex gap-3">
+          <button type="submit" class="flex-1 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all shadow-lg shadow-emerald-600/30">
+            <i class="fa-solid fa-code ml-1.5"></i> نشر الكود البرمجي
+          </button>
+          <button type="button" onclick="window.closeModal('modal-add-content')" class="px-5 py-3 rounded-xl bg-slate-800 text-slate-300 font-bold">
+            إلغاء
+          </button>
+        </div>
+      </form>
+
+      <!-- ================= FORM 3: CREATOR IDEA FORM ================= -->
+      <form id="form-publish-creator" onsubmit="window.submitPublishCreator(event)" class="hidden space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">عنوان الفكرة الجذاب:</label>
+          <input type="text" id="creator-title" required placeholder="مثال: سر الـ 10 ثواني لمضاعفة المشاهدات، 3 أدوات ذكاء اصطناعي لا يعرفها أحد..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">المنصة المستهدفة:</label>
+            <select id="creator-platform" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+              <option value="YouTube Shorts">YouTube Shorts</option>
+              <option value="TikTok & Reels">TikTok & Instagram Reels</option>
+              <option value="YouTube Long Video">فيديو يوتيوب طويل</option>
+              <option value="Podcast">بودكاست صوتي</option>
+            </select>
+          </div>
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="font-bold text-slate-300">نسبة النجاح والانتشار المتوقعة:</label>
+              <span id="creator-rate-val" class="font-bold text-amber-400 font-mono text-sm">85%</span>
+            </div>
+            <input type="range" id="creator-rate" min="50" max="99" value="85" oninput="document.getElementById('creator-rate-val').textContent = this.value + '%'" class="w-full accent-amber-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">خطاف الفيديو (The Viral Hook - أول 3 ثوانٍ):</label>
+          <input type="text" id="creator-hook" required placeholder="مثال: 'لو بتضيّع وقتك في... اسمع الكلمتين دول قبل ما تندم!'" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">السكربت وتفاصيل الفكرة (Core Script Outline):</label>
+          <textarea id="creator-body" rows="4" required placeholder="اشرح خطوات الفيديو، القيمة المقدمة، والسر الذي ستكشفه للمشاهد..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-amber-500"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">الدعوة للتفاعل (Call to Action - CTA):</label>
+          <input type="text" id="creator-cta" placeholder="مثال: 'احفظ الفيديو للمذاكرة لاحقاً واكتب في التعليقات أكثر مادة صعبة عليك!'" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+        </div>
+
+        <div class="pt-3 flex gap-3">
+          <button type="submit" class="flex-1 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black transition-all shadow-lg shadow-amber-500/20">
+            <i class="fa-solid fa-lightbulb ml-1.5"></i> نشر فكرة المحتوى
+          </button>
+          <button type="button" onclick="window.closeModal('modal-add-content')" class="px-5 py-3 rounded-xl bg-slate-800 text-slate-300 font-bold">
+            إلغاء
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ==================== EDIT ITEM MODAL (FOR POSTS/CODES/IDEAS) ==================== -->
+  <div id="modal-edit-content" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-5 shadow-2xl overflow-y-auto max-h-[92vh] custom-scroll">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="font-black text-lg text-white"><i class="fa-solid fa-pen-to-square ml-1 text-indigo-400"></i> تعديل المنشور</h3>
+        <button onclick="window.closeModal('modal-edit-content')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="form-edit-content" onsubmit="window.submitEditContent(event)" class="space-y-4 text-xs">
+        <input type="hidden" id="edit-item-id" />
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">العنوان:</label>
+          <input type="text" id="edit-item-title" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500">
+        </div>
+
+        <div id="edit-field-grade-wrapper">
+          <label class="block font-bold text-slate-300 mb-1">المرحلة الدراسية أو اللغة:</label>
+          <input type="text" id="edit-item-stage" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">المحتوى الكامل:</label>
+          <textarea id="edit-item-content" rows="6" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-indigo-500 font-mono"></textarea>
+        </div>
+
+        <div id="edit-field-url-wrapper">
+          <label class="block font-bold text-slate-300 mb-1">رابط المصدر أو الملف (اختياري):</label>
+          <input type="url" id="edit-item-url" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500">
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="submit" class="flex-1 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-md">
+            حفظ التعديلات
+          </button>
+          <button type="button" onclick="window.closeModal('modal-edit-content')" class="px-5 py-3 rounded-xl bg-slate-800 text-slate-300 font-bold">
+            إلغاء
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== NEW TOURNAMENT MODAL ==================== -->
+  <div id="modal-new-tournament" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-5 shadow-2xl overflow-y-auto max-h-[90vh] custom-scroll">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+            <i class="fa-solid fa-trophy text-lg"></i>
+          </div>
+          <div>
+            <h3 class="font-black text-lg text-white">إنشاء بطولة جديدة</h3>
+            <span class="text-xs text-slate-400">حدد اسم اللعبة، عدد الفرق، والجوائز</span>
+          </div>
+        </div>
+        <button onclick="window.closeModal('modal-new-tournament')" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="form-new-tourney" onsubmit="window.submitNewTournament(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">اسم البطولة:</label>
+          <input type="text" id="t-name" required placeholder="مثال: بطولة رمضان للألعاب الإلكترونية، دوري فالورانت..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">اللعبة / الرياضة:</label>
+            <input type="text" id="t-game" required placeholder="مثال: EA FC 24, Valorant, PUBG, Chess..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">عدد الفرق المتنافسة:</label>
+            <select id="t-teams-count" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 font-bold">
+              <option value="4">4 فرق (نصف النهائي ثم النهائي)</option>
+              <option value="8" selected>8 فرق (ربع النهائي، نصف النهائي، والنهائي)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">الجوائز المقررة:</label>
+          <input type="text" id="t-prize" placeholder="مثال: كأس البطولة + بطاقات هدايا $100" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">قوانين وشروط البطولة:</label>
+          <textarea id="t-rules" rows="3" placeholder="مواعيد المباريات، شروط الاتصال، وقوانين اللعب النظيف..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-amber-500"></textarea>
+        </div>
+
+        <div class="pt-3 flex gap-3">
+          <button type="submit" class="flex-1 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black transition-all shadow-lg shadow-amber-500/20">
+            <i class="fa-solid fa-bolt ml-1.5"></i> بناء وتوليد شجرة البطولة
+          </button>
+          <button type="button" onclick="window.closeModal('modal-new-tournament')" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold transition-all">
+            إلغاء
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== EDIT TOURNAMENT MODAL ==================== -->
+  <div id="modal-edit-tournament" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-5 shadow-2xl overflow-y-auto max-h-[92vh] custom-scroll">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="font-black text-lg text-white"><i class="fa-solid fa-pen-to-square ml-1 text-amber-400"></i> تعديل بيانات البطولة</h3>
+        <button onclick="window.closeModal('modal-edit-tournament')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="form-edit-tourney" onsubmit="window.submitEditTournament(event)" class="space-y-4 text-xs">
+        <input type="hidden" id="edit-t-id" />
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">اسم البطولة:</label>
+          <input type="text" id="edit-t-name" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">اللعبة / الرياضة:</label>
+          <input type="text" id="edit-t-game" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">الجوائز المقررة:</label>
+          <input type="text" id="edit-t-prize" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">قوانين وشروط البطولة:</label>
+          <textarea id="edit-t-rules" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-amber-500"></textarea>
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="submit" class="flex-1 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black transition-all shadow-md">
+            حفظ تعديل البطولة
+          </button>
+          <button type="button" onclick="window.closeModal('modal-edit-tournament')" class="px-5 py-3 rounded-xl bg-slate-800 text-slate-300 font-bold">
+            إلغاء
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== JOIN TEAM MODAL ==================== -->
+  <div id="modal-join-team" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="font-black text-lg text-white"><i class="fa-solid fa-users ml-1 text-indigo-400"></i> تسجيل فريق بالبطولة</h3>
+        <button onclick="window.closeModal('modal-join-team')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="form-join-team" onsubmit="window.submitJoinTeam(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">اسم الفريق:</label>
+          <input type="text" id="team-name-input" required placeholder="مثال: الصقور، Alpha Esports..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">اسم كابتن الفريق:</label>
+          <input type="text" id="captain-name-input" required placeholder="اسم قائد الفريق" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">قائمة اللاعبين (مفصولة بفواصل):</label>
+          <input type="text" id="players-list-input" placeholder="لاعب 1, لاعب 2, لاعب 3..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-indigo-500">
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="submit" class="flex-1 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-md">
+            تأكيد انضمام الفريق
+          </button>
+          <button type="button" onclick="window.closeModal('modal-join-team')" class="px-4 py-3 rounded-xl bg-slate-800 text-slate-300 font-bold">
+            إلغاء
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-message" class="fixed bottom-6 left-6 z-50 transform -translate-y-10 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-3 px-5 py-3 rounded-2xl bg-slate-800/95 border border-slate-700 text-white text-xs font-bold shadow-2xl">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+    <span id="toast-text">تمت العملية بنجاح!</span>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-900 border-t border-slate-800/80 py-8 px-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-extrabold text-slate-300">EduHub & Tournaments Hub</span>
+        <span>•</span>
+        <span class="text-emerald-400 font-bold">سحابة Firestore حية</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-400">
+        <button onclick="window.switchPlatform('edu')" class="hover:text-indigo-400">منصة المذاكرات</button>
+        <button onclick="window.switchPlatform('tourney')" class="hover:text-amber-400">منصة البطولات</button>
+      </div>
+      <div>
+        <span>نظام لايك واحد وتعليق واحد لكل حساب • إدارة كاملة للملف الشخصي</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FIREBASE MODULAR CDN ES-MODULE SCRIPT ==================== -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    import { 
+      getFirestore,
+      collection, 
+      doc, 
+      setDoc, 
+      updateDoc, 
+      deleteDoc, 
+      onSnapshot,
+      getDocFromServer
+    } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+    import { 
+      getAuth, 
+      GoogleAuthProvider, 
+      signInWithPopup, 
+      signOut, 
+      onAuthStateChanged 
+    } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+    // Firebase Project Configuration
+    const firebaseConfig = {
+      projectId: "gen-lang-client-0248736673",
+      appId: "1:903033694362:web:814cf135f2964e82099723",
+      apiKey: "AIzaSyBX3q_9AM43Qa8peUSWZsc8sDEYzZAlKWo",
+      authDomain: "gen-lang-client-0248736673.firebaseapp.com",
+      firestoreDatabaseId: "ai-studio-eduhubtournament-cf3f4f72-6651-48b8-ab8a-8a66644e50c7",
+      storageBucket: "gen-lang-client-0248736673.firebasestorage.app",
+      messagingSenderId: "903033694362"
+    };
+
+    // Initialize Firebase Services strictly targeting the named Firestore database
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+    const auth = getAuth(app);
+
+    // Global State (Initial empty arrays - NO fake/mock starter data)
+    let currentPlatform = 'edu';
+    let currentEduFilter = 'all';
+    let currentTourneyView = 'bracket';
+    let currentPublishType = 'study';
+    let selectedTournamentId = null;
+    let currentUser = null;
+    let eduItems = [];
+    let tournaments = [];
+    let userBookmarks = [];
+
+    const LS_BOOKMARKS = 'eduhub_user_bookmarks';
+    const LS_DEVICE_ID = 'eduhub_device_unique_uid';
+
+    // Ensure persistent unique user ID for single-like and single-comment rule per account
+    function getEffectiveUserId() {
+      if (currentUser && currentUser.uid) {
+        return currentUser.uid;
+      }
+      let devId = localStorage.getItem(LS_DEVICE_ID);
+      if (!devId) {
+        devId = 'guest_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+        localStorage.setItem(LS_DEVICE_ID, devId);
+      }
+      return devId;
+    }
+
+    function loadUserBookmarks() {
+      try {
+        const stored = localStorage.getItem(LS_BOOKMARKS);
+        userBookmarks = stored ? JSON.parse(stored) : [];
+      } catch (e) {
+        userBookmarks = [];
+      }
+    }
+
+    function saveUserBookmarks() {
+      try {
+        localStorage.setItem(LS_BOOKMARKS, JSON.stringify(userBookmarks));
+      } catch (e) {}
+    }
+
+    // ==================== AUTHENTICATION ====================
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        currentUser = {
+          uid: user.uid,
+          name: user.displayName || user.email?.split('@')[0] || 'مستخدم',
+          email: user.email,
+          photoURL: user.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${user.uid}`
+        };
+        updateAuthUI(true);
+      } else {
+        currentUser = null;
+        updateAuthUI(false);
+      }
+      renderEduItems();
+      if (currentUser && !document.getElementById('modal-user-profile').classList.contains('hidden')) {
+        renderUserProfileData();
+      }
+    });
+
+    window.handleGoogleSignIn = async function() {
+      try {
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(auth, provider);
+        showToast('تم تسجيل الدخول بجوجل بنجاح!', 'fa-circle-check');
+      } catch (err) {
+        console.error("Auth error:", err);
+        alert('تعذر تسجيل الدخول بجوجل: ' + err.message);
+      }
+    };
+
+    window.handleSignOut = async function() {
+      try {
+        await signOut(auth);
+        currentUser = null;
+        updateAuthUI(false);
+        window.closeModal('modal-user-profile');
+        showToast('تم تسجيل الخروج بنجاح', 'fa-right-from-bracket');
+        renderEduItems();
+      } catch (e) {
+        console.error("Sign out error:", e);
+      }
+    };
+
+    function updateAuthUI(isSignedIn) {
+      const loginBtn = document.getElementById('google-login-btn');
+      const userMenu = document.getElementById('user-profile-menu');
+      const avatar = document.getElementById('user-avatar');
+      const name = document.getElementById('user-name');
+
+      if (isSignedIn && currentUser) {
+        loginBtn.classList.add('hidden');
+        userMenu.classList.remove('hidden');
+        userMenu.classList.add('flex');
+        avatar.src = currentUser.photoURL;
+        name.textContent = currentUser.name;
+      } else {
+        loginBtn.classList.remove('hidden');
+        userMenu.classList.add('hidden');
+        userMenu.classList.remove('flex');
+      }
+    }
+
+    // ==================== FIRESTORE REALTIME SYNC ====================
+    function initRealtimeSync() {
+      // Test server connection to named database
+      getDocFromServer(doc(db, 'test', 'ping'))
+        .then(() => {
+          updateCloudStatus(true);
+        })
+        .catch(err => {
+          // If error is only that doc doesn't exist or permission, the backend was reached!
+          if (err && err.code !== 'not-found') {
+            updateCloudStatus(true);
+          } else if (err?.message?.includes('database') && err?.code === 'not-found') {
+            updateCloudStatus(false);
+          } else {
+            updateCloudStatus(true);
+          }
+        });
+
+      // 1) Realtime Study Materials / Codes / Ideas
+      try {
+        const materialsCol = collection(db, 'study_materials');
+        onSnapshot(materialsCol, snapshot => {
+          eduItems = [];
+          snapshot.forEach(docSnap => {
+            eduItems.push({ id: docSnap.id, ...docSnap.data() });
+          });
+          // Sort newest first
+          eduItems.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+          renderEduItems();
+          updateStats();
+          if (currentUser) renderUserProfileData();
+        }, err => {
+          console.error("Firestore materials sync error:", err);
+        });
+      } catch (e) {
+        console.error(e);
+      }
+
+      // 2) Realtime Tournaments
+      try {
+        const tourneysCol = collection(db, 'tournaments');
+        onSnapshot(tourneysCol, snapshot => {
+          tournaments = [];
+          snapshot.forEach(docSnap => {
+            tournaments.push({ id: docSnap.id, ...docSnap.data() });
+          });
+          tournaments.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+          populateTournamentSelector();
+          renderActiveTournament();
+          updateStats();
+          if (currentUser) renderUserProfileData();
+        }, err => {
+          console.error("Firestore tournaments sync error:", err);
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function updateCloudStatus(isOnline) {
+      const dot = document.getElementById('firebase-status-dot');
+      const text = document.getElementById('firebase-status-text');
+      if (isOnline) {
+        dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400 animate-pulse";
+        text.textContent = "سحابة Firestore متصلة";
+        text.className = "hidden sm:inline font-bold text-emerald-400";
+      } else {
+        dot.className = "w-2.5 h-2.5 rounded-full bg-amber-400";
+        text.textContent = "جاري الاتصال بالسحابة...";
+        text.className = "hidden sm:inline font-bold text-amber-400";
+      }
+    }
+
+    // ==================== PUBLISHING FORMS SWITCHER (3 PATHWAYS) ====================
+    window.switchPublishType = function(type) {
+      currentPublishType = type;
+      ['study', 'code', 'creator'].forEach(t => {
+        const btn = document.getElementById(`pub-type-btn-${t}`);
+        const form = document.getElementById(`form-publish-${t}`);
+        if (t === type) {
+          form.classList.remove('hidden');
+          if (t === 'study') {
+            btn.className = "p-4 rounded-2xl border text-right transition-all flex flex-col justify-between gap-3 bg-blue-600/20 border-blue-500 text-white shadow-lg shadow-blue-500/20";
+          } else if (t === 'code') {
+            btn.className = "p-4 rounded-2xl border text-right transition-all flex flex-col justify-between gap-3 bg-emerald-600/20 border-emerald-500 text-white shadow-lg shadow-emerald-500/20";
+          } else {
+            btn.className = "p-4 rounded-2xl border text-right transition-all flex flex-col justify-between gap-3 bg-amber-600/20 border-amber-500 text-white shadow-lg shadow-amber-500/20";
+          }
+        } else {
+          form.classList.add('hidden');
+          btn.className = "p-4 rounded-2xl border text-right transition-all flex flex-col justify-between gap-3 bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700";
+        }
+      });
+    };
+
+    window.openAddModalWithType = function(type) {
+      window.openModal('modal-add-content');
+      window.switchPublishType(type);
+    };
+
+    // 1) Submit Study Material
+    window.submitPublishStudy = async function(e) {
+      e.preventDefault();
+      const title = document.getElementById('study-title').value.trim();
+      const subject = document.getElementById('study-subject').value.trim();
+      const grade = document.getElementById('study-grade').value;
+      const typeTag = document.querySelector('input[name="study-type-tag"]:checked')?.value || 'ملخص شرح وقوانين';
+      const content = document.getElementById('study-content').value.trim();
+      const url = document.getElementById('study-url').value.trim();
+
+      const newId = 'edu_study_' + Date.now();
+      const newItem = {
+        title,
+        subject,
+        grade,
+        stage: grade,
+        stageCategory: grade,
+        type: 'study',
+        subType: typeTag,
+        content,
+        url,
+        rating: 5.0,
+        ratingCount: 1,
+        bookmarksCount: 0,
+        authorName: currentUser ? currentUser.name : 'طالب / معلم',
+        authorId: getEffectiveUserId(),
+        authorEmail: currentUser ? currentUser.email : '',
+        createdAt: new Date().toISOString(),
+        comments: []
+      };
+
+      try {
+        await setDoc(doc(db, 'study_materials', newId), newItem);
+        window.closeModal('modal-add-content');
+        document.getElementById('form-publish-study').reset();
+        showToast('تم نشر المذكرة التعليمية بنجاح!', 'fa-book-open');
+      } catch (err) {
+        console.error("Save study error:", err);
+        alert('تعذر الحفظ في قاعدة البيانات: ' + err.message);
+      }
+    };
+
+    // 2) Submit Code Snippet
+    window.submitPublishCode = async function(e) {
+      e.preventDefault();
+      const title = document.getElementById('code-title').value.trim();
+      const lang = document.getElementById('code-lang').value;
+      const category = document.getElementById('code-category').value.trim();
+      const desc = document.getElementById('code-desc').value.trim();
+      const packages = document.getElementById('code-packages').value.trim();
+      const code = document.getElementById('code-snippet-text').value.trim();
+
+      const newId = 'edu_code_' + Date.now();
+      const newItem = {
+        title,
+        subject: category,
+        techCategory: lang,
+        language: lang,
+        description: desc,
+        packagesRequired: packages,
+        stage: lang,
+        type: 'code',
+        content: code,
+        url: '',
+        rating: 5.0,
+        ratingCount: 1,
+        bookmarksCount: 0,
+        authorName: currentUser ? currentUser.name : 'مطور برمجيات',
+        authorId: getEffectiveUserId(),
+        authorEmail: currentUser ? currentUser.email : '',
+        createdAt: new Date().toISOString(),
+        comments: []
+      };
+
+      try {
+        await setDoc(doc(db, 'study_materials', newId), newItem);
+        window.closeModal('modal-add-content');
+        document.getElementById('form-publish-code').reset();
+        showToast('تم نشر الكود البرمجي بنجاح!', 'fa-code');
+      } catch (err) {
+        console.error("Save code error:", err);
+        alert('تعذر الحفظ في قاعدة البيانات: ' + err.message);
+      }
+    };
+
+    // 3) Submit Creator Idea
+    window.submitPublishCreator = async function(e) {
+      e.preventDefault();
+      const title = document.getElementById('creator-title').value.trim();
+      const platform = document.getElementById('creator-platform').value;
+      const successRate = parseInt(document.getElementById('creator-rate').value) || 85;
+      const hook = document.getElementById('creator-hook').value.trim();
+      const body = document.getElementById('creator-body').value.trim();
+      const cta = document.getElementById('creator-cta').value.trim();
+
+      const newId = 'edu_idea_' + Date.now();
+      const combinedContent = `الخطاف (Hook):\n${hook}\n\nالسكربت وتفاصيل الفكرة:\n${body}\n\nالدعوة للتفاعل (CTA):\n${cta}`;
+
+      const newItem = {
+        title,
+        subject: platform,
+        targetPlatform: platform,
+        successRate: successRate,
+        hook: hook,
+        cta: cta,
+        stage: platform,
+        techCategory: platform,
+        type: 'creator',
+        content: combinedContent,
+        url: '',
+        rating: 5.0,
+        ratingCount: 1,
+        bookmarksCount: 0,
+        authorName: currentUser ? currentUser.name : 'صانع محتوى',
+        authorId: getEffectiveUserId(),
+        authorEmail: currentUser ? currentUser.email : '',
+        createdAt: new Date().toISOString(),
+        comments: []
+      };
+
+      try {
+        await setDoc(doc(db, 'study_materials', newId), newItem);
+        window.closeModal('modal-add-content');
+        document.getElementById('form-publish-creator').reset();
+        showToast('تم نشر فكرة المحتوى بنجاح!', 'fa-lightbulb');
+      } catch (err) {
+        console.error("Save creator idea error:", err);
+        alert('تعذر الحفظ في قاعدة البيانات: ' + err.message);
+      }
+    };
+
+    // ==================== EDIT CONTENT HANDLER ====================
+    window.openEditContentModal = function(id) {
+      const item = eduItems.find(i => i.id === id);
+      if (!item) return;
+
+      document.getElementById('edit-item-id').value = item.id;
+      document.getElementById('edit-item-title').value = item.title || '';
+      document.getElementById('edit-item-content').value = item.content || '';
+      document.getElementById('edit-item-stage').value = item.stage || item.grade || item.language || '';
+      document.getElementById('edit-item-url').value = item.url || '';
+
+      window.openModal('modal-edit-content');
+    };
+
+    window.submitEditContent = async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('edit-item-id').value;
+      const title = document.getElementById('edit-item-title').value.trim();
+      const content = document.getElementById('edit-item-content').value.trim();
+      const stage = document.getElementById('edit-item-stage').value.trim();
+      const url = document.getElementById('edit-item-url').value.trim();
+
+      try {
+        await updateDoc(doc(db, 'study_materials', id), {
+          title,
+          content,
+          stage,
+          grade: stage,
+          language: stage,
+          url,
+          updatedAt: new Date().toISOString()
+        });
+        window.closeModal('modal-edit-content');
+        showToast('تم تحديث المنشور بنجاح!', 'fa-check');
+        renderEduItems();
+        if (currentUser) renderUserProfileData();
+      } catch (err) {
+        console.error("Edit error:", err);
+        alert('تعذر تعديل المنشور: ' + err.message);
+      }
+    };
+
+    // ==================== PLATFORM 1: EDUHUB FEED ====================
+    window.setEduCategory = function(cat) {
+      currentEduFilter = cat;
+      document.querySelectorAll('.edu-filter-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = "edu-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30";
+        } else {
+          btn.className = "edu-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:bg-slate-800";
+        }
+      });
+      renderEduItems();
+    };
+
+    window.resetEduFilters = function() {
+      document.getElementById('edu-stage-filter').value = 'all';
+      document.getElementById('edu-tech-filter').value = 'all';
+      document.getElementById('edu-search-input').value = '';
+      window.setEduCategory('all');
+    };
+
+    window.renderEduItems = function() {
+      const grid = document.getElementById('edu-cards-grid');
+      const emptyState = document.getElementById('edu-empty-state');
+      const searchKeyword = (document.getElementById('edu-search-input')?.value || '').toLowerCase().trim();
+      const stageFilter = document.getElementById('edu-stage-filter')?.value || 'all';
+      const techFilter = document.getElementById('edu-tech-filter')?.value || 'all';
+
+      let filtered = eduItems.filter(item => {
+        if (currentEduFilter === 'bookmarks') {
+          if (!userBookmarks.includes(item.id)) return false;
+        } else if (currentEduFilter !== 'all' && item.type !== currentEduFilter) {
+          return false;
+        }
+
+        if (searchKeyword) {
+          const matchTitle = item.title?.toLowerCase().includes(searchKeyword);
+          const matchSub = item.subject?.toLowerCase().includes(searchKeyword);
+          const matchContent = item.content?.toLowerCase().includes(searchKeyword);
+          if (!matchTitle && !matchSub && !matchContent) return false;
+        }
+
+        if (stageFilter !== 'all') {
+          if (item.stage !== stageFilter && item.grade !== stageFilter) return false;
+        }
+
+        if (techFilter !== 'all') {
+          const matchTech = item.techCategory === techFilter || item.language === techFilter || item.targetPlatform?.includes(techFilter);
+          if (!matchTech) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        grid.innerHTML = filtered.map(item => createEduCardHTML(item)).join('');
+      }
+    };
+
+    function createEduCardHTML(item) {
+      const isBookmarked = userBookmarks.includes(item.id);
+      const isCode = item.type === 'code';
+      const isCreator = item.type === 'creator';
+      const currentEffId = getEffectiveUserId();
+      const isMyItem = item.authorId === currentEffId || (currentUser && item.authorEmail === currentUser.email);
+
+      // Check if user has already commented on this specific item (Single comment rule per account)
+      const commentsCount = item.comments ? item.comments.length : 0;
+      const userExistingComment = (item.comments || []).find(c => c.authorId === currentEffId || (currentUser && c.authorEmail === currentUser.email));
+
+      let badgeBg = 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+      let typeLabel = 'مذكرة تعليمية';
+      let typeIcon = 'fa-book-open';
+
+      if (isCode) {
+        badgeBg = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+        typeLabel = item.language ? `كود ${item.language}` : 'كود وسكربت';
+        typeIcon = 'fa-code';
+      } else if (isCreator) {
+        badgeBg = 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+        typeLabel = item.targetPlatform || 'فكرة محتوى';
+        typeIcon = 'fa-lightbulb';
+      }
+
+      return `
+        <div class="glass-card rounded-3xl p-5 sm:p-6 transition-all duration-300 flex flex-col justify-between gap-4 group">
+          <div class="space-y-3.5">
+            <!-- Header Badges and Bookmarks -->
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="px-2.5 py-1 rounded-xl text-xs font-bold border ${badgeBg} flex items-center gap-1.5 shadow-sm">
+                  <i class="fa-solid ${typeIcon}"></i>
+                  ${escapeHtml(typeLabel)}
+                </span>
+                
+                ${item.stage ? `
+                  <span class="px-2.5 py-1 rounded-xl text-[11px] font-medium bg-slate-800 text-slate-300 border border-slate-700/80">
+                    ${escapeHtml(item.stage)}
+                  </span>
+                ` : ''}
+
+                ${item.subject && !isCreator ? `
+                  <span class="px-2 py-0.5 rounded-lg text-[10px] bg-slate-900 text-slate-400 font-mono">
+                    ${escapeHtml(item.subject)}
+                  </span>
+                ` : ''}
+              </div>
+
+              <div class="flex items-center gap-1">
+                ${isMyItem ? `
+                  <button onclick="window.openEditContentModal('${item.id}')" title="تعديل المنشور" class="text-xs p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-indigo-400 transition-all">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button onclick="window.deleteEduItem('${item.id}')" title="حذف المنشور" class="text-xs p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-red-400 transition-all">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                ` : ''}
+                <button onclick="window.toggleBookmark('${item.id}')" title="حفظ في المفضلة" class="text-sm p-1.5 rounded-lg bg-slate-950 border border-slate-800 transition-all ${isBookmarked ? 'text-rose-500 bg-rose-500/10 border-rose-500/30' : 'text-slate-400 hover:text-rose-400'}">
+                  <i class="fa-${isBookmarked ? 'solid' : 'regular'} fa-bookmark"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Title -->
+            <h3 class="text-base font-extrabold text-white leading-snug group-hover:text-indigo-300 transition-colors">
+              ${escapeHtml(item.title)}
+            </h3>
+
+            <!-- Creator Special Card Element -->
+            ${isCreator ? `
+              <div class="space-y-2 pt-1">
+                <div class="flex items-center justify-between p-2.5 rounded-2xl bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-transparent border border-amber-500/30">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-amber-400 text-sm"></i>
+                    <span class="text-xs font-bold text-amber-300">نسبة الانتشار المتوقعة:</span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-lg bg-amber-500 text-slate-950 font-black font-mono text-xs shadow-sm">
+                    ${item.successRate || 85}%
+                  </span>
+                </div>
+                
+                ${item.hook ? `
+                  <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 text-xs">
+                    <span class="text-[10px] text-amber-400 font-bold block mb-1">🎣 خطاف البداية (The Viral Hook):</span>
+                    <p class="text-slate-200 font-medium italic">"${escapeHtml(item.hook)}"</p>
+                  </div>
+                ` : ''}
+              </div>
+            ` : ''}
+
+            <!-- Code Snippet Display with Mac Window Styling -->
+            ${isCode ? `
+              <div class="relative mt-2 rounded-2xl overflow-hidden border border-slate-800 bg-slate-950">
+                <div class="flex items-center justify-between px-3 py-1.5 bg-slate-900 border-b border-slate-800/80">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                    <span class="text-[10px] text-slate-400 font-mono mr-2">${item.language || 'Code'}</span>
+                  </div>
+                  <button onclick="window.copyCodeSnippet(this, \`${encodeURIComponent(item.content)}\`)" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-indigo-600 text-[10px] text-slate-300 hover:text-white font-mono flex items-center gap-1 transition-all">
+                    <i class="fa-regular fa-copy"></i> نسخ الكود
+                  </button>
+                </div>
+                ${item.description ? `<p class="text-xs text-slate-400 p-2.5 pb-0">${escapeHtml(item.description)}</p>` : ''}
+                <pre class="p-3.5 text-emerald-400 font-mono text-[11px] overflow-x-auto max-h-48 custom-scroll dir-ltr select-all"><code>${escapeHtml(item.content)}</code></pre>
+              </div>
+            ` : `
+              <p class="text-xs text-slate-300 leading-relaxed line-clamp-4 whitespace-pre-line bg-slate-950/60 p-3.5 rounded-2xl border border-slate-800/60">
+                ${escapeHtml(item.content)}
+              </p>
+            `}
+
+            ${item.url ? `
+              <div class="pt-1">
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 font-bold">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح الرابط / تحميل المذكرة
+                </a>
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- Card Footer: Author, Ratings, Comments Drawer Button -->
+          <div class="pt-3 border-t border-slate-800/80 space-y-3">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+              <span class="flex items-center gap-1.5 font-medium text-slate-300">
+                <i class="fa-solid fa-circle-user text-indigo-400"></i> ${escapeHtml(item.authorName || 'مشارك')}
+              </span>
+              
+              <div class="flex items-center gap-1 text-amber-400 cursor-pointer" onclick="window.rateItem('${item.id}')" title="اضغط للتقييم">
+                ${renderStarRating(item.rating || 5)}
+                <span class="text-[11px] text-slate-400 mr-1 font-mono">(${item.ratingCount || 1})</span>
+              </div>
+            </div>
+
+            <!-- Comments Drawer Toggle & Heart Count -->
+            <div class="flex items-center justify-between pt-1 text-xs">
+              <button onclick="window.toggleCommentsDrawer('${item.id}')" class="text-slate-400 hover:text-indigo-300 font-medium flex items-center gap-1.5">
+                <i class="fa-regular fa-comment-dots text-indigo-400"></i> التعليقات (${commentsCount})
+              </button>
+              
+              <span class="text-[11px] text-slate-500 font-mono">
+                <i class="fa-solid fa-heart text-rose-500/70 mr-0.5"></i> ${item.bookmarksCount || 0} حفظ
+              </span>
+            </div>
+
+            <!-- Comments Expansion Box with Comment Likes (Single Like & Single Comment rule) -->
+            <div id="comments-box-${item.id}" class="hidden pt-3 border-t border-slate-800 space-y-3">
+              <div class="space-y-2.5 max-h-56 overflow-y-auto custom-scroll pr-1">
+                ${(item.comments && item.comments.length > 0) ? item.comments.map((c, idx) => {
+                  const commentId = c.id || `c_${idx}`;
+                  const likes = c.likesCount || 0;
+                  const likedArr = Array.isArray(c.likedBy) ? c.likedBy : [];
+                  const isLikedByMe = likedArr.includes(currentEffId);
+                  const isMyComment = c.authorId === currentEffId || (currentUser && c.authorEmail === currentUser.email);
+
+                  return `
+                    <div class="bg-slate-950 p-3 rounded-2xl border ${isMyComment ? 'border-indigo-500/40 bg-indigo-950/15' : 'border-slate-800/80'} text-[11px] space-y-1.5 transition-all">
+                      <div class="flex items-center justify-between text-slate-400">
+                        <div class="flex items-center gap-1.5">
+                          <i class="fa-solid fa-circle-user text-indigo-400 text-xs"></i>
+                          <span class="font-bold text-slate-200">${escapeHtml(c.author)}</span>
+                          ${isMyComment ? '<span class="text-[9px] px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">تعليقك</span>' : ''}
+                        </div>
+                        <span class="text-[9px] font-mono text-slate-500">${c.time || 'الآن'}</span>
+                      </div>
+                      
+                      <p class="text-slate-200 leading-relaxed">${escapeHtml(c.text)}</p>
+                      
+                      <!-- Footer of Comment: Like Button (Single Like Toggle per Account) -->
+                      <div class="flex items-center justify-between pt-1 border-t border-slate-900">
+                        <div class="flex items-center gap-2">
+                          ${isMyComment ? `
+                            <button onclick="window.editUserComment('${item.id}', '${commentId}')" title="تعديل تعليقك" class="text-slate-400 hover:text-indigo-300 text-[10px]">
+                              <i class="fa-solid fa-pen"></i> تعديل
+                            </button>
+                            <button onclick="window.deleteUserComment('${item.id}', '${commentId}')" title="حذف تعليقك" class="text-slate-400 hover:text-red-400 text-[10px]">
+                              <i class="fa-solid fa-trash"></i> حذف
+                            </button>
+                          ` : ''}
+                        </div>
+
+                        <!-- One Like Only Button with Toggle -->
+                        <button onclick="window.toggleCommentLike('${item.id}', '${commentId}')" title="${isLikedByMe ? 'اضغط لإلغاء إعجابك' : 'تسجيل إعجاب (لايك واحد لكل حساب)'}" class="flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-[10px] font-bold transition-all ${isLikedByMe ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40 shadow-sm shadow-rose-500/20 scale-105' : 'bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-rose-400 border border-slate-800'}">
+                          <i class="fa-solid fa-heart ${isLikedByMe ? 'text-rose-500' : 'text-slate-500'}"></i>
+                          <span class="font-mono">${likes}</span>
+                          <span class="text-[9px] font-normal">${isLikedByMe ? 'معجب' : 'إعجاب'}</span>
+                        </button>
+                      </div>
+                    </div>
+                  `;
+                }).join('') : '<p class="text-[11px] text-slate-500 text-center py-3">لا توجد تعليقات بعد، كن أول من يترك تعليقاً!</p>'}
+              </div>
+
+              <!-- Comment Form Box: Strictly 1 Comment per Account on this Item -->
+              ${userExistingComment ? `
+                <div class="p-3 rounded-2xl bg-indigo-950/20 border border-indigo-500/30 flex flex-col sm:flex-row items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px]">
+                      <i class="fa-solid fa-check"></i>
+                    </span>
+                    <span class="text-[11px] font-bold text-slate-300">أضفت تعليقك على هذا المنشور بالفعل (مسموح بتعليق واحد لكل حساب)</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button onclick="window.editUserComment('${item.id}', '${userExistingComment.id}')" class="px-2.5 py-1 rounded-lg bg-indigo-600/30 hover:bg-indigo-600 text-indigo-300 hover:text-white text-[10px] font-bold transition-all">
+                      <i class="fa-solid fa-pen ml-1"></i> تعديل تعليقي
+                    </button>
+                    <button onclick="window.deleteUserComment('${item.id}', '${userExistingComment.id}')" class="px-2.5 py-1 rounded-lg bg-red-950/50 hover:bg-red-800 text-red-300 hover:text-white text-[10px] font-bold transition-all">
+                      <i class="fa-solid fa-trash ml-1"></i> حذف
+                    </button>
+                  </div>
+                </div>
+              ` : `
+                <div class="flex gap-2">
+                  <input type="text" id="comment-input-${item.id}" placeholder="اكتب تعليقك (مسموح بتعليق واحد فقط لكل حساب)..." class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+                  <button onclick="window.addCommentToItem('${item.id}')" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md transition-all">
+                    إرسال
+                  </button>
+                </div>
+              `}
+            </div>
+
+          </div>
+        </div>
+      `;
+    }
+
+    function renderStarRating(rating) {
+      let fullStars = Math.floor(rating);
+      let starsHtml = '';
+      for (let i = 1; i <= 5; i++) {
+        if (i <= fullStars) {
+          starsHtml += '<i class="fa-solid fa-star text-[10px]"></i>';
+        } else {
+          starsHtml += '<i class="fa-regular fa-star text-[10px] text-slate-600"></i>';
+        }
+      }
+      return starsHtml;
+    }
+
+    window.copyCodeSnippet = function(btn, encodedCode) {
+      const code = decodeURIComponent(encodedCode);
+      navigator.clipboard.writeText(code).then(() => {
+        const oldHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> تم النسخ!';
+        showToast('تم نسخ الكود البرمجي بنجاح!', 'fa-copy');
+        setTimeout(() => { btn.innerHTML = oldHtml; }, 2000);
+      });
+    };
+
+    window.toggleBookmark = async function(itemId) {
+      const exists = userBookmarks.includes(itemId);
+      if (exists) {
+        userBookmarks = userBookmarks.filter(id => id !== itemId);
+      } else {
+        userBookmarks.push(itemId);
+      }
+      saveUserBookmarks();
+
+      const item = eduItems.find(i => i.id === itemId);
+      if (item) {
+        const newCount = Math.max(0, (item.bookmarksCount || 0) + (exists ? -1 : 1));
+        try {
+          await updateDoc(doc(db, 'study_materials', itemId), { bookmarksCount: newCount });
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      showToast(exists ? 'تمت الإزالة من المفضلة' : 'تم الحفظ في المفضلة!', 'fa-bookmark');
+      renderEduItems();
+      updateStats();
+    };
+
+    window.rateItem = async function(itemId) {
+      const rating = prompt("قيّم هذا المحتوى من 1 إلى 5 نجوم:", "5");
+      const num = parseFloat(rating);
+      if (num >= 1 && num <= 5) {
+        const item = eduItems.find(i => i.id === itemId);
+        if (item) {
+          const count = (item.ratingCount || 1) + 1;
+          const newAvg = parseFloat((((item.rating || 5) * (count - 1) + num) / count).toFixed(1));
+          try {
+            await updateDoc(doc(db, 'study_materials', itemId), { rating: newAvg, ratingCount: count });
+            showToast(`شكراً لتقييمك (${num} نجوم)!`, 'fa-star');
+          } catch (e) {
+            console.error(e);
+          }
+        }
+      }
+    };
+
+    window.toggleCommentsDrawer = function(itemId) {
+      const box = document.getElementById(`comments-box-${itemId}`);
+      if (box) box.classList.toggle('hidden');
+    };
+
+    // ==================== COMMENT HANDLERS (SINGLE COMMENT RULE) ====================
+    window.addCommentToItem = async function(itemId) {
+      const input = document.getElementById(`comment-input-${itemId}`);
+      const text = input ? input.value.trim() : '';
+      if (!text) return;
+
+      const userId = getEffectiveUserId();
+      const item = eduItems.find(i => i.id === itemId);
+      if (!item) return;
+
+      item.comments = item.comments || [];
+      
+      // Strict rule: Only 1 comment per account on this item
+      const alreadyHasComment = item.comments.some(c => c.authorId === userId || (currentUser && c.authorEmail === currentUser.email));
+      if (alreadyHasComment) {
+        alert('⚠️ مسموح بكتابة تعليق واحد فقط لكل حساب على هذا المنشور. يمكنك تعديل تعليقك الحالي أو حذفه لكتابة تعليق جديد.');
+        return;
+      }
+
+      const author = currentUser ? currentUser.name : (prompt("اكتب اسمك للتعليق:", "زائر") || "زائر");
+
+      const newComment = {
+        id: 'comment_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+        author: author,
+        authorId: userId,
+        authorEmail: currentUser ? currentUser.email : '',
+        text: text,
+        likesCount: 0,
+        likedBy: [],
+        time: new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
+      };
+
+      item.comments.unshift(newComment);
+
+      try {
+        await updateDoc(doc(db, 'study_materials', itemId), { comments: item.comments });
+        input.value = '';
+        showToast('تمت إضافة تعليقك بنجاح!', 'fa-comment');
+        renderEduItems();
+        if (currentUser) renderUserProfileData();
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    window.deleteUserComment = async function(itemId, commentId) {
+      if (!confirm('هل تريد حذف تعليقك؟ يمكنك إضافة تعليق جديد بعد الحذف.')) return;
+      const item = eduItems.find(i => i.id === itemId);
+      if (!item || !item.comments) return;
+
+      item.comments = item.comments.filter(c => c.id !== commentId);
+
+      try {
+        await updateDoc(doc(db, 'study_materials', itemId), { comments: item.comments });
+        showToast('تم حذف تعليقك، يمكنك الآن كتابة تعليق جديد', 'fa-trash');
+        renderEduItems();
+        if (currentUser) renderUserProfileData();
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    window.editUserComment = async function(itemId, commentId) {
+      const item = eduItems.find(i => i.id === itemId);
+      if (!item || !item.comments) return;
+
+      const comment = item.comments.find(c => c.id === commentId);
+      if (!comment) return;
+
+      const newText = prompt('تعديل تعليقك:', comment.text);
+      if (newText && newText.trim() && newText.trim() !== comment.text) {
+        comment.text = newText.trim();
+        try {
+          await updateDoc(doc(db, 'study_materials', itemId), { comments: item.comments });
+          showToast('تم تحديث تعليقك بنجاح!', 'fa-check');
+          renderEduItems();
+          if (currentUser) renderUserProfileData();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+
+    // ==================== COMMENT LIKE HANDLER (ONE LIKE TOGGLE PER ACCOUNT) ====================
+    window.toggleCommentLike = async function(itemId, commentId) {
+      const item = eduItems.find(i => i.id === itemId);
+      if (!item || !item.comments) return;
+
+      const comment = item.comments.find(c => (c.id === commentId) || (commentId.startsWith('c_') && item.comments[parseInt(commentId.split('_')[1])] === c));
+      if (!comment) return;
+
+      const userId = getEffectiveUserId();
+      comment.likedBy = Array.isArray(comment.likedBy) ? comment.likedBy : [];
+      const alreadyLiked = comment.likedBy.includes(userId);
+
+      if (alreadyLiked) {
+        // Toggle OFF (Unlike)
+        comment.likedBy = comment.likedBy.filter(uid => uid !== userId);
+        comment.likesCount = Math.max(0, (comment.likesCount || 1) - 1);
+        showToast('تم إلغاء الإعجاب بالتعليق', 'fa-heart');
+      } else {
+        // Toggle ON (Single like allowed)
+        comment.likedBy.push(userId);
+        comment.likesCount = (comment.likesCount || 0) + 1;
+        showToast('تم الإعجاب بالتعليق! ❤️', 'fa-heart');
+      }
+
+      try {
+        await updateDoc(doc(db, 'study_materials', itemId), { comments: item.comments });
+        renderEduItems();
+      } catch (err) {
+        console.error("Like error:", err);
+      }
+    };
+
+    window.deleteEduItem = async function(id) {
+      if (!confirm('هل تريد بالتأكيد حذف هذا المنشور نهائياً من قاعدة البيانات؟')) return;
+      try {
+        await deleteDoc(doc(db, 'study_materials', id));
+        showToast('تم حذف المحتوى بنجاح', 'fa-trash');
+        if (currentUser) renderUserProfileData();
+      } catch (e) {
+        console.error("Delete error:", e);
+      }
+    };
+
+    // ==================== PLATFORM 2: TOURNAMENTS ====================
+    function populateTournamentSelector() {
+      const selector = document.getElementById('tourney-selector');
+      const emptyState = document.getElementById('tourney-empty-state');
+      const activeCard = document.getElementById('tourney-active-card');
+      const strip = document.getElementById('tourney-selector-strip');
+
+      if (tournaments.length === 0) {
+        emptyState.classList.remove('hidden');
+        activeCard.classList.add('hidden');
+        strip.classList.add('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      activeCard.classList.remove('hidden');
+      strip.classList.remove('hidden');
+
+      if (!selectedTournamentId || !tournaments.find(t => t.id === selectedTournamentId)) {
+        selectedTournamentId = tournaments[0].id;
+      }
+
+      selector.innerHTML = tournaments.map(t => `
+        <option value="${t.id}" ${t.id === selectedTournamentId ? 'selected' : ''}>
+          ${escapeHtml(t.name)}
+        </option>
+      `).join('');
+    }
+
+    window.handleSelectTournament = function(id) {
+      selectedTournamentId = id;
+      renderActiveTournament();
+    };
+
+    window.switchTourneyView = function(view) {
+      currentTourneyView = view;
+      ['bracket', 'matches', 'teams'].forEach(v => {
+        const btn = document.getElementById(`tview-btn-${v}`);
+        const container = document.getElementById(`tview-${v}-container`);
+        if (v === view) {
+          btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 transition-all";
+          container.classList.remove('hidden');
+        } else {
+          btn.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all";
+          container.classList.add('hidden');
+        }
+      });
+    };
+
+    function renderActiveTournament() {
+      const tournament = tournaments.find(t => t.id === selectedTournamentId);
+      if (!tournament) return;
+
+      document.getElementById('active-tourney-name').textContent = tournament.name;
+      document.getElementById('active-tourney-meta').textContent = `اللعبة: ${tournament.game} • النظام: خروج مغلوب • الفرق: ${tournament.teamCount} • الجائزة: ${tournament.prize || 'كأس البطولة'}`;
+      
+      const statusBadge = document.getElementById('active-tourney-status');
+      if (tournament.winnerTeam) {
+        statusBadge.textContent = "منتهية وتتويج البطل";
+        statusBadge.className = "px-3 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30";
+      } else {
+        statusBadge.textContent = "جارية الآن";
+        statusBadge.className = "px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+      }
+
+      const champBox = document.getElementById('champion-showcase-box');
+      if (tournament.winnerTeam) {
+        champBox.classList.remove('hidden');
+        document.getElementById('champion-team-name').textContent = tournament.winnerTeam;
+      } else {
+        champBox.classList.add('hidden');
+      }
+
+      renderInteractiveBracket(tournament);
+      renderMatchesSchedule(tournament);
+      renderTeamsRoster(tournament);
+    }
+
+    function renderInteractiveBracket(tournament) {
+      const container = document.getElementById('interactive-bracket-tree');
+      if (!container || !tournament.matches) return;
+
+      const rounds = {};
+      tournament.matches.forEach(m => {
+        if (!rounds[m.round]) rounds[m.round] = [];
+        rounds[m.round].push(m);
+      });
+
+      const roundNumbers = Object.keys(rounds).sort((a, b) => a - b);
+      let html = '';
+
+      roundNumbers.forEach((roundNum, index) => {
+        const matchesInRound = rounds[roundNum];
+        let roundTitle = `الجولة ${roundNum}`;
+        if (roundNum == 1 && roundNumbers.length === 3) roundTitle = 'ربع النهائي';
+        else if (roundNum == 1 && roundNumbers.length === 2) roundTitle = 'نصف النهائي';
+        else if (roundNum == 2 && roundNumbers.length === 3) roundTitle = 'نصف النهائي';
+        else if (index === roundNumbers.length - 1) roundTitle = 'المباراة النهائية';
+
+        html += `
+          <div class="flex-1 flex flex-col justify-around gap-6">
+            <div class="text-center pb-2 border-b border-slate-800">
+              <span class="text-xs font-black text-amber-400 block">${roundTitle}</span>
+              <span class="text-[10px] text-slate-500">${matchesInRound.length} مباريات</span>
+            </div>
+            <div class="flex flex-col justify-around gap-8 my-auto">
+              ${matchesInRound.map(match => createMatchCardHTML(tournament.id, match)).join('')}
+            </div>
+          </div>
+        `;
+
+        if (index < roundNumbers.length - 1) {
+          html += `
+            <div class="hidden md:flex flex-col justify-center items-center px-1 text-slate-700">
+              <i class="fa-solid fa-chevron-left text-lg text-indigo-500/50"></i>
+            </div>
+          `;
+        }
+      });
+
+      container.innerHTML = html;
+    }
+
+    function createMatchCardHTML(tourneyId, match) {
+      const hasWinner = !!match.winner;
+      const isTeamAWinner = match.winner === match.teamA;
+      const isTeamBWinner = match.winner === match.teamB;
+
+      return `
+        <div class="bg-slate-950 border ${hasWinner ? 'border-indigo-500/40 bg-indigo-950/10' : 'border-slate-800'} rounded-2xl p-3 shadow-lg w-64 space-y-2.5 transition-all hover:border-slate-700">
+          <div class="flex items-center justify-between text-[10px] text-slate-400 pb-1.5 border-b border-slate-800/80">
+            <span class="font-bold text-slate-300">${match.roundName}</span>
+            <span class="font-mono ${hasWinner ? 'text-emerald-400 font-bold' : 'text-slate-500'}">
+              ${hasWinner ? 'منتهية' : 'قيد اللعب'}
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between p-1.5 rounded-xl ${isTeamAWinner ? 'bg-indigo-600/20 border border-indigo-500/40' : 'bg-slate-900'}">
+            <div class="flex items-center gap-2 truncate">
+              <div class="w-6 h-6 rounded-lg bg-slate-800 flex items-center justify-center text-[10px] text-slate-300 font-bold">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-200 truncate ${isTeamAWinner ? 'text-indigo-300' : ''}">
+                ${escapeHtml(match.teamA || 'في الانتظار')}
+              </span>
+            </div>
+            <input type="number" min="0" value="${match.scoreA || 0}" onchange="window.updateMatchScore('${tourneyId}', '${match.id}', 'A', this.value)" class="w-9 h-7 bg-slate-950 border border-slate-700 rounded-lg text-center text-xs font-mono font-bold text-white focus:outline-none focus:border-indigo-500">
+          </div>
+
+          <div class="flex items-center justify-between p-1.5 rounded-xl ${isTeamBWinner ? 'bg-indigo-600/20 border border-indigo-500/40' : 'bg-slate-900'}">
+            <div class="flex items-center gap-2 truncate">
+              <div class="w-6 h-6 rounded-lg bg-slate-800 flex items-center justify-center text-[10px] text-slate-300 font-bold">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <span class="text-xs font-bold text-slate-200 truncate ${isTeamBWinner ? 'text-indigo-300' : ''}">
+                ${escapeHtml(match.teamB || 'في الانتظار')}
+              </span>
+            </div>
+            <input type="number" min="0" value="${match.scoreB || 0}" onchange="window.updateMatchScore('${tourneyId}', '${match.id}', 'B', this.value)" class="w-9 h-7 bg-slate-950 border border-slate-700 rounded-lg text-center text-xs font-mono font-bold text-white focus:outline-none focus:border-indigo-500">
+          </div>
+
+          <div class="pt-1 flex gap-1">
+            <button onclick="window.advanceMatchWinner('${tourneyId}', '${match.id}', '${match.teamA}')" title="تأهيل الفريق الأول" class="flex-1 py-1 rounded-lg bg-slate-900 hover:bg-indigo-600/30 text-[10px] font-bold text-slate-300 border border-slate-800">
+              تأهيل A
+            </button>
+            <button onclick="window.advanceMatchWinner('${tourneyId}', '${match.id}', '${match.teamB}')" title="تأهيل الفريق الثاني" class="flex-1 py-1 rounded-lg bg-slate-900 hover:bg-indigo-600/30 text-[10px] font-bold text-slate-300 border border-slate-800">
+              تأهيل B
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    window.updateMatchScore = async function(tourneyId, matchId, teamSlot, newScore) {
+      const tourney = tournaments.find(t => t.id === tourneyId);
+      if (!tourney) return;
+
+      const match = tourney.matches.find(m => m.id === matchId);
+      if (!match) return;
+
+      const scoreNum = parseInt(newScore) || 0;
+      if (teamSlot === 'A') match.scoreA = scoreNum;
+      else match.scoreB = scoreNum;
+
+      try {
+        await updateDoc(doc(db, 'tournaments', tourneyId), { matches: tourney.matches });
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    window.advanceMatchWinner = async function(tourneyId, matchId, winningTeam) {
+      if (!winningTeam || winningTeam === 'في الانتظار...' || winningTeam.includes('انتظار')) {
+        alert('لا يمكن تأهيل فريق لم يتم تحديده بعد!');
+        return;
+      }
+
+      const tourney = tournaments.find(t => t.id === tourneyId);
+      if (!tourney) return;
+
+      const match = tourney.matches.find(m => m.id === matchId);
+      if (!match) return;
+
+      match.winner = winningTeam;
+
+      if (match.nextMatchId) {
+        const nextMatch = tourney.matches.find(m => m.id === match.nextMatchId);
+        if (nextMatch) {
+          if (match.slot === 'A') nextMatch.teamA = winningTeam;
+          else if (match.slot === 'B') nextMatch.teamB = winningTeam;
+        }
+      } else {
+        tourney.winnerTeam = winningTeam;
+        tourney.status = 'completed';
+        showToast(`🏆 تهانينا! تم تتويج فريق [${winningTeam}] بطلاً للبطولة!`, 'fa-trophy');
+      }
+
+      try {
+        await updateDoc(doc(db, 'tournaments', tourneyId), {
+          matches: tourney.matches,
+          winnerTeam: tourney.winnerTeam || null,
+          status: tourney.status || 'active'
+        });
+        renderActiveTournament();
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    function renderMatchesSchedule(tournament) {
+      const container = document.getElementById('matches-schedule-list');
+      if (!container || !tournament.matches) return;
+
+      container.innerHTML = tournament.matches.map(m => `
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">
+              ${m.round}
+            </div>
+            <div>
+              <span class="text-xs font-black text-slate-200">${m.roundName}</span>
+              <p class="text-[11px] text-slate-400 mt-0.5">الفائز: <b class="text-indigo-400">${m.winner || 'لم يُحدد بعد'}</b></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 font-mono text-sm">
+            <span class="font-bold text-slate-200">${escapeHtml(m.teamA || 'فريق 1')}</span>
+            <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-amber-400 font-bold">${m.scoreA || 0} - ${m.scoreB || 0}</span>
+            <span class="font-bold text-slate-200">${escapeHtml(m.teamB || 'فريق 2')}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderTeamsRoster(tournament) {
+      const container = document.getElementById('teams-roster-grid');
+      if (!container || !tournament.teams) return;
+
+      container.innerHTML = tournament.teams.map((t, index) => `
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="w-6 h-6 rounded-lg bg-indigo-500/20 text-indigo-400 text-xs font-bold flex items-center justify-center">#${index + 1}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-medium">مؤكد</span>
+          </div>
+          <h4 class="font-bold text-sm text-white">${escapeHtml(t.name)}</h4>
+          <p class="text-xs text-slate-400">الكابتن: <span class="text-slate-300 font-medium">${escapeHtml(t.captain || 'غير محدد')}</span></p>
+          <p class="text-[11px] text-slate-500 truncate">اللاعبين: ${escapeHtml(t.players || 'قائمة الفريق')}</p>
+        </div>
+      `).join('');
+    }
+
+    window.resetCurrentTournamentBracket = async function() {
+      if (!confirm('هل تريد بالتأكيد إعادة تصفير نتائج مباريات هذه البطولة؟')) return;
+
+      const tourney = tournaments.find(t => t.id === selectedTournamentId);
+      if (!tourney) return;
+
+      tourney.winnerTeam = null;
+      tourney.status = 'active';
+      tourney.matches.forEach(m => {
+        m.scoreA = 0;
+        m.scoreB = 0;
+        m.winner = null;
+        if (m.round > 1) {
+          m.teamA = 'في انتظار الفائز...';
+          m.teamB = 'في انتظار الفائز...';
+        }
+      });
+
+      try {
+        await updateDoc(doc(db, 'tournaments', tourney.id), {
+          matches: tourney.matches,
+          winnerTeam: null,
+          status: 'active'
+        });
+        showToast('تمت إعادة ضبط الشجرة بنجاح', 'fa-rotate-left');
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    window.openEditTournamentModal = function(id = null) {
+      const targetId = id || selectedTournamentId;
+      const tourney = tournaments.find(t => t.id === targetId);
+      if (!tourney) return;
+
+      document.getElementById('edit-t-id').value = tourney.id;
+      document.getElementById('edit-t-name').value = tourney.name || '';
+      document.getElementById('edit-t-game').value = tourney.game || '';
+      document.getElementById('edit-t-prize').value = tourney.prize || '';
+      document.getElementById('edit-t-rules').value = tourney.rules || '';
+
+      window.openModal('modal-edit-tournament');
+    };
+
+    window.submitEditTournament = async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('edit-t-id').value;
+      const name = document.getElementById('edit-t-name').value.trim();
+      const game = document.getElementById('edit-t-game').value.trim();
+      const prize = document.getElementById('edit-t-prize').value.trim();
+      const rules = document.getElementById('edit-t-rules').value.trim();
+
+      try {
+        await updateDoc(doc(db, 'tournaments', id), {
+          name,
+          game,
+          prize,
+          rules,
+          updatedAt: new Date().toISOString()
+        });
+        window.closeModal('modal-edit-tournament');
+        showToast('تم تحديث بيانات البطولة بنجاح!', 'fa-check');
+        renderActiveTournament();
+        if (currentUser) renderUserProfileData();
+      } catch (err) {
+        console.error(err);
+        alert('تعذر تحديث البطولة: ' + err.message);
+      }
+    };
+
+    window.deleteCurrentTournament = async function(tourneyId = null) {
+      const targetId = tourneyId || selectedTournamentId;
+      if (!confirm('هل تريد حذف هذه البطولة نهائياً من قاعدة البيانات؟')) return;
+
+      try {
+        await deleteDoc(doc(db, 'tournaments', targetId));
+        showToast('تم حذف البطولة بنجاح', 'fa-trash');
+        selectedTournamentId = null;
+        if (currentUser) renderUserProfileData();
+      } catch (e) {
+        console.error("Delete tourney error:", e);
+      }
+    };
+
+    window.submitNewTournament = async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('t-name').value.trim();
+      const game = document.getElementById('t-game').value.trim();
+      const teamCount = parseInt(document.getElementById('t-teams-count').value);
+      const prize = document.getElementById('t-prize').value.trim();
+      const rules = document.getElementById('t-rules').value.trim();
+
+      const newId = 'tourney_' + Date.now();
+      const teams = [];
+      for (let i = 1; i <= teamCount; i++) {
+        teams.push({
+          id: `t_${i}`,
+          name: `فريق ${i}`,
+          captain: `كابتن ${i}`,
+          players: `لاعب ${i}`,
+          status: 'confirmed'
+        });
+      }
+
+      const matches = [];
+      if (teamCount === 4) {
+        matches.push(
+          { id: 'm1', round: 1, roundName: 'نصف النهائي (1)', teamA: teams[0].name, teamB: teams[1].name, scoreA: 0, scoreB: 0, winner: null, nextMatchId: 'm3', slot: 'A' },
+          { id: 'm2', round: 1, roundName: 'نصف النهائي (2)', teamA: teams[2].name, teamB: teams[3].name, scoreA: 0, scoreB: 0, winner: null, nextMatchId: 'm3', slot: 'B' },
+          { id: 'm3', round: 2, roundName: 'المباراة النهائية', teamA: 'في انتظار الفائز...', teamB: 'في انتظار الفائز...', scoreA: 0, scoreB: 0, winner: null, nextMatchId: null, slot: null }
+        );
+      } else {
+        matches.push(
+          { id: 'm1', round: 1, roundName: 'ربع النهائي (1)', teamA: teams[0].name, teamB: teams[1].name, scoreA: 0, scoreB: 0, winner: null, nextMatchId: 'm5', slot: 'A' },
+          { id: 'm2', round: 1, roundName: 'ربع النهائي (2)', teamA: teams[2].name, teamB: teams[3].name, scoreA: 0, scoreB: 0, winner: null, nextMatchId: 'm5', slot: 'B' },
+          { id: 'm3', round: 1, roundName: 'ربع النهائي (3)', teamA: teams[4].name, teamB: teams[5].name, scoreA: 0, scoreB: 0, winner: null, nextMatchId: 'm6', slot: 'A' },
+          { id: 'm4', round: 1, roundName: 'ربع النهائي (4)', teamA: teams[6].name, teamB: teams[7].name, scoreA: 0, scoreB: 0, winner: null, nextMatchId: 'm6', slot: 'B' },
+          { id: 'm5', round: 2, roundName: 'نصف النهائي (1)', teamA: 'في انتظار الفائز...', teamB: 'في انتظار الفائز...', scoreA: 0, scoreB: 0, winner: null, nextMatchId: 'm7', slot: 'A' },
+          { id: 'm6', round: 2, roundName: 'نصف النهائي (2)', teamA: 'في انتظار الفائز...', teamB: 'في انتظار الفائز...', scoreA: 0, scoreB: 0, winner: null, nextMatchId: 'm7', slot: 'B' },
+          { id: 'm7', round: 3, roundName: 'المباراة النهائية', teamA: 'في انتظار الفائز...', teamB: 'في انتظار الفائز...', scoreA: 0, scoreB: 0, winner: null, nextMatchId: null, slot: null }
+        );
+      }
+
+      const newTourney = {
+        name,
+        game,
+        teamCount,
+        format: 'single_elimination',
+        prize,
+        rules,
+        status: 'active',
+        winnerTeam: null,
+        organizerName: currentUser ? currentUser.name : 'المنظم',
+        organizerId: getEffectiveUserId(),
+        organizerEmail: currentUser ? currentUser.email : '',
+        createdAt: new Date().toISOString(),
+        teams,
+        matches
+      };
+
+      try {
+        await setDoc(doc(db, 'tournaments', newId), newTourney);
+        selectedTournamentId = newId;
+        window.closeModal('modal-new-tournament');
+        document.getElementById('form-new-tourney').reset();
+        showToast('تم إنشاء البطولة وتوليد شجرة التصفيات بنجاح!', 'fa-trophy');
+      } catch (err) {
+        console.error("Save tourney error:", err);
+      }
+    };
+
+    window.submitJoinTeam = async function(e) {
+      e.preventDefault();
+      const teamName = document.getElementById('team-name-input').value.trim();
+      const captainName = document.getElementById('captain-name-input').value.trim();
+      const players = document.getElementById('players-list-input').value.trim();
+
+      const tourney = tournaments.find(t => t.id === selectedTournamentId);
+      if (!tourney) return;
+
+      const newTeam = {
+        id: 'team_' + Date.now(),
+        name: teamName,
+        captain: captainName,
+        players: players,
+        status: 'confirmed'
+      };
+
+      tourney.teams = tourney.teams || [];
+      tourney.teams.push(newTeam);
+
+      try {
+        await updateDoc(doc(db, 'tournaments', tourney.id), { teams: tourney.teams });
+        window.closeModal('modal-join-team');
+        document.getElementById('form-join-team').reset();
+        showToast(`تم تسجيل فريق ${teamName} بنجاح!`, 'fa-users');
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    // ==================== USER PROFILE MANAGEMENT (COMPLETE CRUD) ====================
+    window.openUserProfileModal = function() {
+      if (!currentUser) {
+        window.handleGoogleSignIn();
+        return;
+      }
+
+      document.getElementById('profile-modal-avatar').src = currentUser.photoURL;
+      document.getElementById('profile-modal-name').textContent = currentUser.name;
+      document.getElementById('profile-modal-email').textContent = currentUser.email;
+
+      renderUserProfileData();
+      window.openModal('modal-user-profile');
+    };
+
+    function renderUserProfileData() {
+      if (!currentUser) return;
+      const myId = getEffectiveUserId();
+
+      // 1) My Posts (Study materials, Codes, Ideas)
+      const myPosts = eduItems.filter(i => i.authorId === myId || (i.authorEmail && i.authorEmail === currentUser.email));
+      document.getElementById('profile-count-posts').textContent = myPosts.length;
+
+      const postsList = document.getElementById('profile-posts-list');
+      if (myPosts.length === 0) {
+        postsList.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">لم تقم بنشر أي مذكرات أو أكواد بعد.</p>';
+      } else {
+        postsList.innerHTML = myPosts.map(p => `
+          <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 flex items-center justify-between gap-3">
+            <div class="truncate">
+              <span class="text-xs font-bold text-white block truncate">${escapeHtml(p.title)}</span>
+              <span class="text-[10px] text-slate-400">${p.subject || ''} • ${p.type === 'code' ? 'كود برمجي' : (p.type === 'creator' ? 'فكرة محتوى' : 'مذكرة')}</span>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="window.openEditContentModal('${p.id}')" title="تعديل المنشور" class="px-2.5 py-1 rounded-lg bg-indigo-950/40 hover:bg-indigo-800 text-indigo-300 hover:text-white text-xs font-bold transition-all">
+                <i class="fa-solid fa-pen"></i> تعديل
+              </button>
+              <button onclick="window.deleteEduItem('${p.id}')" title="حذف" class="px-2.5 py-1 rounded-lg bg-red-950/40 hover:bg-red-800 text-red-300 hover:text-white text-xs font-bold transition-all">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // 2) My Tournaments
+      const myTourneys = tournaments.filter(t => t.organizerId === myId || (t.organizerEmail && t.organizerEmail === currentUser.email));
+      document.getElementById('profile-count-tourneys').textContent = myTourneys.length;
+
+      const tourneysList = document.getElementById('profile-tourneys-list');
+      if (myTourneys.length === 0) {
+        tourneysList.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">لم تقم بإنشاء أي بطولات بعد.</p>';
+      } else {
+        tourneysList.innerHTML = myTourneys.map(t => `
+          <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 flex items-center justify-between gap-3">
+            <div class="truncate">
+              <span class="text-xs font-bold text-white block truncate">${escapeHtml(t.name)}</span>
+              <span class="text-[10px] text-amber-400">${t.game} • ${t.teamCount} فرق • ${t.winnerTeam ? 'بطل: ' + t.winnerTeam : 'جارية'}</span>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="window.viewTournamentFromProfile('${t.id}')" title="عرض في اللوحة" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-all">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button onclick="window.openEditTournamentModal('${t.id}')" title="تعديل البطولة" class="px-2.5 py-1 rounded-lg bg-indigo-950/40 hover:bg-indigo-800 text-indigo-300 text-xs font-bold transition-all">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button onclick="window.deleteCurrentTournament('${t.id}')" title="حذف البطولة" class="px-2.5 py-1 rounded-lg bg-red-950/40 hover:bg-red-800 text-red-300 text-xs font-bold transition-all">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // 3) My Comments
+      const myComments = [];
+      eduItems.forEach(i => {
+        if (i.comments) {
+          i.comments.forEach(c => {
+            if (c.authorId === myId || (currentUser && c.authorEmail === currentUser.email)) {
+              myComments.push({ itemId: i.id, itemTitle: i.title, comment: c });
+            }
+          });
+        }
+      });
+
+      document.getElementById('profile-count-comments').textContent = myComments.length;
+      const commentsList = document.getElementById('profile-comments-list');
+      if (myComments.length === 0) {
+        commentsList.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">لم تقم بكتابة أي تعليقات بعد.</p>';
+      } else {
+        commentsList.innerHTML = myComments.map(mc => `
+          <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-indigo-300 truncate">على: ${escapeHtml(mc.itemTitle)}</span>
+              <span class="text-[10px] text-slate-500 font-mono">${mc.comment.likesCount || 0} إعجاب</span>
+            </div>
+            <p class="text-xs text-slate-200">${escapeHtml(mc.comment.text)}</p>
+            <div class="flex items-center gap-2 pt-1 border-t border-slate-900 justify-end">
+              <button onclick="window.editUserComment('${mc.itemId}', '${mc.comment.id}')" class="text-indigo-400 hover:text-indigo-300 text-[10px] font-bold">
+                <i class="fa-solid fa-pen ml-0.5"></i> تعديل
+              </button>
+              <button onclick="window.deleteUserComment('${mc.itemId}', '${mc.comment.id}')" class="text-red-400 hover:text-red-300 text-[10px] font-bold">
+                <i class="fa-solid fa-trash ml-0.5"></i> حذف
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    window.switchProfileTab = function(tab) {
+      const postsBtn = document.getElementById('ptab-btn-posts');
+      const tourneysBtn = document.getElementById('ptab-btn-tourneys');
+      const commentsBtn = document.getElementById('ptab-btn-comments');
+
+      const postsContent = document.getElementById('ptab-content-posts');
+      const tourneysContent = document.getElementById('ptab-content-tourneys');
+      const commentsContent = document.getElementById('ptab-content-comments');
+
+      postsContent.classList.add('hidden');
+      tourneysContent.classList.add('hidden');
+      commentsContent.classList.add('hidden');
+
+      postsBtn.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all";
+      tourneysBtn.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all";
+      commentsBtn.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all";
+
+      if (tab === 'posts') {
+        postsBtn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white transition-all";
+        postsContent.classList.remove('hidden');
+      } else if (tab === 'tourneys') {
+        tourneysBtn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 transition-all";
+        tourneysContent.classList.remove('hidden');
+      } else {
+        commentsBtn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white transition-all";
+        commentsContent.classList.remove('hidden');
+      }
+    };
+
+    window.viewTournamentFromProfile = function(id) {
+      selectedTournamentId = id;
+      window.switchPlatform('tourney');
+      window.closeModal('modal-user-profile');
+      renderActiveTournament();
+    };
+
+    // ==================== NAVIGATION & GENERAL ====================
+    window.switchPlatform = function(platform) {
+      currentPlatform = platform;
+
+      ['edu', 'tourney'].forEach(p => {
+        const sec = document.getElementById(`section-${p}`);
+        const tabBtn = document.getElementById(`tab-btn-${p}`);
+        if (p === platform) {
+          sec.classList.remove('hidden');
+          if (tabBtn) {
+            tabBtn.className = p === 'edu' 
+              ? "flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+              : "flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30";
+          }
+        } else {
+          sec.classList.add('hidden');
+          if (tabBtn) {
+            tabBtn.className = "flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 transition-all";
+          }
+        }
+      });
+
+      document.querySelectorAll('.mobile-tab-btn').forEach(btn => {
+        if (btn.dataset.tab === platform) {
+          btn.className = "mobile-tab-btn flex-1 py-1.5 text-center text-xs font-bold rounded-lg bg-indigo-600/30 text-indigo-300 border border-indigo-500/30";
+        } else {
+          btn.className = "mobile-tab-btn flex-1 py-1.5 text-center text-xs font-bold rounded-lg text-slate-400 hover:bg-slate-800";
+        }
+      });
+
+      const actionLabel = document.getElementById('global-action-label');
+      if (platform === 'tourney') {
+        actionLabel.textContent = "إنشاء بطولة";
+      } else {
+        actionLabel.textContent = "نشر محتوى جديد";
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.handleGlobalAddAction = function() {
+      if (currentPlatform === 'tourney') {
+        window.openNewTournamentModal();
+      } else {
+        window.openAddModalWithType('study');
+      }
+    };
+
+    window.openNewTournamentModal = function() { window.openModal('modal-new-tournament'); };
+    window.openJoinTeamModal = function() { window.openModal('modal-join-team'); };
+
+    window.openModal = function(id) {
+      const m = document.getElementById(id);
+      if (m) {
+        m.classList.remove('hidden');
+        m.classList.add('flex');
+      }
+    };
+
+    window.closeModal = function(id) {
+      const m = document.getElementById(id);
+      if (m) {
+        m.classList.add('hidden');
+        m.classList.remove('flex');
+      }
+    };
+
+    function showToast(message, iconClass = 'fa-circle-check') {
+      const toast = document.getElementById('toast-message');
+      const text = document.getElementById('toast-text');
+      const icon = document.getElementById('toast-icon');
+      
+      text.textContent = message;
+      icon.className = `fa-solid ${iconClass} text-emerald-400 text-base`;
+
+      toast.classList.remove('-translate-y-10', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('-translate-y-10', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+
+    function updateStats() {
+      const studyCount = eduItems.filter(i => i.type === 'study').length;
+      const codeCount = eduItems.filter(i => i.type === 'code').length;
+      const ideaCount = eduItems.filter(i => i.type === 'creator').length;
+
+      document.getElementById('stat-materials-count').textContent = studyCount;
+      document.getElementById('stat-codes-count').textContent = codeCount;
+      document.getElementById('stat-ideas-count').textContent = ideaCount;
+      document.getElementById('stat-bookmarks-count').textContent = userBookmarks.length;
+
+      let totalMatches = 0;
+      let totalTeams = 0;
+      tournaments.forEach(t => {
+        totalMatches += (t.matches ? t.matches.length : 0);
+        totalTeams += (t.teams ? t.teams.length : 0);
+      });
+
+      document.getElementById('tourney-stat-total').textContent = tournaments.length;
+      document.getElementById('tourney-stat-matches').textContent = totalMatches;
+      document.getElementById('tourney-stat-teams').textContent = totalTeams;
+    }
+
+    function escapeHtml(string) {
+      if (!string) return '';
+      return String(string)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Initialize Application
+    loadUserBookmarks();
+    initRealtimeSync();
+  </script>
+</body>
+</html>
